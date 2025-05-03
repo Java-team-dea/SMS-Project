@@ -1,4 +1,6 @@
+com\mycompany\studentmanagemen\JakartaRestConfiguration.class
+com\controller\StudentRegistrationServlet.class
 com\DAO\StudentDAO.class
 com\model\Student.class
 com\util\Database.class
-com\controller\StudentLoginServlet.class
+com\mycompany\studentmanagement\resources\JakartaEE8Resource.class

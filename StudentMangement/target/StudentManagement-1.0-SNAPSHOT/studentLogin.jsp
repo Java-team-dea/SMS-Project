@@ -324,7 +324,7 @@
                     <i class="fas fa-shield-alt me-1"></i> Protected by NSBM Security Protocol
                 </p>
                 <p class="small text-muted mb-1">
-                    New student? <a href="register.jsp" class="register-link">Register here</a>
+                    New student? <a href="studentRegistration.jsp" class="register-link">Register here</a>
                 </p>
                 <p class="small text-muted">
                     Need help? <a href="studentSupport.jsp" class="support-link">Contact Student Support</a>
@@ -396,6 +396,7 @@
                 toggleIcon.classList.add('fa-eye-slash');
             }
         }
+        
     </script>
 </body>
 </html>

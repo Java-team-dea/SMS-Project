@@ -475,6 +475,18 @@
             option.textContent = text;
             selectElement.appendChild(option);
         }
+// Restrict enrollmentDate to today only
+  // Allow only today's date in the enrollment date field
+    document.addEventListener('DOMContentLoaded', function () {
+        const enrollmentDateField = document.getElementById('enrollmentDate');
+        const today = new Date().toISOString().split('T')[0];
+        
+        // Set both min and max to today's date
+        enrollmentDateField.setAttribute('min', today);
+        enrollmentDateField.setAttribute('max', today);
+        enrollmentDateField.value = today; // Set default value to today
+    });
+
     </script>
 </body>
 </html>

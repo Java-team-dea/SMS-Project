@@ -1,4 +1,6 @@
-E:\DEA Project\SMS\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
-E:\DEA Project\SMS\SMS-Project\StudentMangement\src\main\java\com\DAO\StudentDAO.java
-E:\DEA Project\SMS\SMS-Project\StudentMangement\src\main\java\com\controller\StudentLoginServlet.java
-E:\DEA Project\SMS\SMS-Project\StudentMangement\src\main\java\com\model\Student.java
+D:\netbean\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagemen\JakartaRestConfiguration.java
+D:\netbean\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
+D:\netbean\SMS-Project\StudentMangement\src\main\java\com\model\Student.java
+D:\netbean\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagement\resources\JakartaEE8Resource.java
+D:\netbean\SMS-Project\StudentMangement\src\main\java\com\controller\StudentRegistrationServlet.java
+D:\netbean\SMS-Project\StudentMangement\src\main\java\com\DAO\StudentDAO.java
