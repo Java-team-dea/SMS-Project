@@ -5,6 +5,7 @@
 package com.DAO;
 
 import com.model.Admin;
+import com.model.Student;
 import com.util.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,13 +40,13 @@ public boolean validateAdmin(Admin admin) throws SQLException, Exception {
     }
 }
 
-public ArrayList<Admin> getAllStudent(){
+public ArrayList<Student> getAllStudent(){
 
   
     
     try{
         
-             ArrayList<Admin> studentList =new  ArrayList<Admin>();
+             ArrayList<Student> studentList =new  ArrayList<Student>();
              
              String query ="select name,email,phone from students";
              
@@ -53,11 +54,12 @@ public ArrayList<Admin> getAllStudent(){
              ResultSet rs=statement.executeQuery(query);
              
              while(rs.next()){
-                 Admin admin=new Admin();
-                 admin.setName(rs.getString("name"));
-                 admin.setEmail(rs.getString("email"));
-                 admin.setPhone("phone");     
-                 studentList.add(admin);
+                 Student student=new Student();
+                 
+                 student.setName(rs.getString("name"));
+                 student.setEmail(rs.getString("email"));
+                 student.setPhone(rs.getString("phone"));     
+                 studentList.add(student);
                  
              }
 

@@ -333,11 +333,16 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Course</th>
+                                        <th scope="col">Phone</th>
                                         <th scope="col" class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                <form action="view" method="post">
+                                    <button type="submit" class="btn btn-success">View</button>
+                                </form>
+                                    
                                     <c:forEach var="student" items="${studentList}">
                                         <tr>
 
