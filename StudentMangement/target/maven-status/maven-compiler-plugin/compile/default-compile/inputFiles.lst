@@ -1,6 +1,9 @@
-D:\netbean\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagemen\JakartaRestConfiguration.java
-D:\netbean\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
-D:\netbean\SMS-Project\StudentMangement\src\main\java\com\model\Student.java
-D:\netbean\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagement\resources\JakartaEE8Resource.java
-D:\netbean\SMS-Project\StudentMangement\src\main\java\com\controller\StudentRegistrationServlet.java
-D:\netbean\SMS-Project\StudentMangement\src\main\java\com\DAO\StudentDAO.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\DAO\AdminDAO.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\model\Student.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\controller\AdminLoginServlet.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\controller\StudentRegistrationServlet.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagemen\JakartaRestConfiguration.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\DAO\StudentDAO.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\model\Admin.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagement\resources\JakartaEE8Resource.java
+E:\Projectclone\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
