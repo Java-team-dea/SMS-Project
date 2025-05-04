@@ -1,0 +1,42 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.DAO;
+
+import com.model.Admin;
+import com.util.Database;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author dilshan
+ */
+public class AdminDAO {
+    
+    public boolean validateAdmin(Admin admin) throws SQLException {
+    String sql = "SELECT * FROM Admin WHERE Email = ? AND Password = ?";
+    
+    try (Connection connection = Database.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+         
+        // Set parameters (plain text comparison)
+        statement.setString(1, admin.getEmail());
+        statement.setString(2, admin.getPassword());
+        
+        try (ResultSet resultSet = statement.executeQuery()) {
+            return resultSet.next(); // Returns true if a matching record exists
+        }
+    } catch (SQLException e) {
+        // Log the error properly
+        throw new RuntimeException("Database error during validation", e);
+    }
+}
+    
+    
+    
+    
+}
