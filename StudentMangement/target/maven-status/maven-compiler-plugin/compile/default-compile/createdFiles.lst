@@ -2,6 +2,7 @@ com\mycompany\studentmanagemen\JakartaRestConfiguration.class
 com\controller\StudentRegistrationServlet.class
 com\DAO\StudentDAO.class
 com\model\Student.class
+com\controller\AdminStudentView.class
 com\DAO\AdminDAO.class
 com\controller\AdminLoginServlet.class
 com\util\Database.class

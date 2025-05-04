@@ -5,11 +5,14 @@
 package com.DAO;
 
 import com.model.Admin;
+import com.model.Student;
 import com.util.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,7 +38,43 @@ public boolean validateAdmin(Admin admin) throws SQLException, Exception {
         // Log the error properly
         throw new RuntimeException("Database error during validation", e);
     }
-} 
+}
+
+public ArrayList<Student> getAllStudent(){
+
+  
     
+    try{
+        
+             ArrayList<Student> studentList =new  ArrayList<Student>();
+             
+             String query ="select name,email,phone from students";
+             
+             Statement statement= Database.getConnection().createStatement();
+             ResultSet rs=statement.executeQuery(query);
+             
+             while(rs.next()){
+                 Student student=new Student();
+                 
+                 student.setName(rs.getString("name"));
+                 student.setEmail(rs.getString("email"));
+                 student.setPhone(rs.getString("phone"));     
+                 studentList.add(student);
+                 
+             }
+
+             
+            return studentList;
+             
+             
+    } catch(Exception e){
+        e.printStackTrace();
+        
+    }
+
+
+return null;
+
     
+}  
 }
