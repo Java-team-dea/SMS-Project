@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,7 +37,42 @@ public boolean validateAdmin(Admin admin) throws SQLException, Exception {
         // Log the error properly
         throw new RuntimeException("Database error during validation", e);
     }
-} 
+}
+
+public ArrayList<Admin> getAllStudent(){
+
+  
     
+    try{
+        
+             ArrayList<Admin> studentList =new  ArrayList<Admin>();
+             
+             String query ="select name,email,phone from students";
+             
+             Statement statement= Database.getConnection().createStatement();
+             ResultSet rs=statement.executeQuery(query);
+             
+             while(rs.next()){
+                 Admin admin=new Admin();
+                 admin.setName(rs.getString("name"));
+                 admin.setEmail(rs.getString("email"));
+                 admin.setPhone("phone");     
+                 studentList.add(admin);
+                 
+             }
+
+             
+            return studentList;
+             
+             
+    } catch(Exception e){
+        e.printStackTrace();
+        
+    }
+
+
+return null;
+
     
+}  
 }

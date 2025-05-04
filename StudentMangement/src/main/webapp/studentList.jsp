@@ -340,9 +340,10 @@
                                 <tbody>
                                     <c:forEach var="student" items="${studentList}">
                                         <tr>
-                                            <td>${student.id}</td>
+
                                             <td>${student.name}</td>
-                                            <td>${student.course}</td>
+                                            <td>${student.email}</td>
+                                             <td>${student.phone}</td>
                                             <td class="text-center">
                                                 <a href="editStudent.jsp?id=${student.id}" class="btn btn-outline-primary btn-sm action-btn me-2">
                                                     <i class="fas fa-edit"></i> Edit
