@@ -4,41 +4,85 @@
  */
 package com.DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import com.model.Student;
 import com.util.Database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
 public class StudentDAO {
-    public boolean registerStudent(Student student) {
-        boolean result = false;
+
+    // Check if email already exists
+    public boolean checkEmailExists(String email) {
+        boolean exists = false;
         try (Connection conn = Database.getConnection()) {
-            String sql = "INSERT INTO students (name, dob, gender, nic, email, phone, address, " +
-                         "enrollmentDate, facultyName, departmentID, password, status) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+            String sql = "SELECT id FROM students WHERE email = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, student.getName());
-            ps.setDate(2, new java.sql.Date(student.getDob().getTime()));
-            ps.setString(3, student.getGender());
-            ps.setString(4, student.getNic());
-            ps.setString(5, student.getEmail());
-            ps.setString(6, student.getPhone());
-            ps.setString(7, student.getAddress());
-            ps.setDate(8, new java.sql.Date(student.getEnrollmentDate().getTime()));
-            ps.setString(9, student.getFacultyName());
-            ps.setInt(10, student.getDepartmentID());
-            ps.setString(11, student.getPassword());
-
-            // Set status to "inactive" by default
-            ps.setString(12, "inactive");
-
-            result = ps.executeUpdate() > 0;
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            exists = rs.next();
         } catch (Exception e) {
-            // Good practice: log errors during development
-            
+            e.printStackTrace();
         }
-        return result;
+        return exists;
+    }
+
+    // Check if name already exists
+    public boolean isNameExists(String name) {
+        boolean exists = false;
+        try (Connection conn = Database.getConnection()) {
+            String sql = "SELECT id FROM students WHERE name = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            exists = rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
+    // Check if NIC already exists
+    public boolean isNicExists(String nic) {
+        boolean exists = false;
+        try (Connection conn = Database.getConnection()) {
+            String sql = "SELECT id FROM students WHERE nic = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nic);
+            ResultSet rs = ps.executeQuery();
+            exists = rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
+    // Register new student
+    public boolean registerStudent(Student student) {
+        boolean success = false;
+
+        try (Connection conn = Database.getConnection()) {
+            String sql = "INSERT INTO students (name, dob, gender, nic, email, phone, address, enrollmentDate, facultyName, departmentID, password, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, student.getName());
+            stmt.setString(2, student.getDob());
+            stmt.setString(3, student.getGender());
+            stmt.setString(4, student.getNic());
+            stmt.setString(5, student.getEmail());
+            stmt.setString(6, student.getPhone());
+            stmt.setString(7, student.getAddress());
+            stmt.setString(8, student.getEnrollmentDate());
+            stmt.setString(9, student.getFacultyName());
+            stmt.setInt(10, student.getDepartmentID());
+            stmt.setString(11, student.getPassword());
+            stmt.setString(12, student.getStatus());
+
+            success = stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return success;
     }
 }

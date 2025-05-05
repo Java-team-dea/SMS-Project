@@ -176,7 +176,7 @@
                 </div>
             </a>
             <div>
-                <a href="login.jsp" class="btn btn-outline-success">Login</a>
+                <a href="studentLogin.jsp" class="btn btn-outline-success">Login</a>
             </div>
         </div>
     </header>
