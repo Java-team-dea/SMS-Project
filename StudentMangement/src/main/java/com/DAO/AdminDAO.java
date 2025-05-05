@@ -48,7 +48,7 @@ public ArrayList<Student> getAllStudent(){
         
              ArrayList<Student> studentList =new  ArrayList<Student>();
              
-             String query ="select name,email,phone from students";
+             String query ="select id,name,email,phone from students";
              
              Statement statement= Database.getConnection().createStatement();
              ResultSet rs=statement.executeQuery(query);
@@ -76,5 +76,22 @@ public ArrayList<Student> getAllStudent(){
 return null;
 
     
-}  
+}
+
+
+    public int countAllStudents() throws SQLException, Exception {
+        String sql = "SELECT COUNT(id) AS total FROM students";
+        
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            
+            if (resultSet.next()) {
+                return resultSet.getInt("total");
+            }
+            return 0;
+        }
+    }
+
+
 }

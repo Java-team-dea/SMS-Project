@@ -12,6 +12,10 @@
         <servlet-name>AdminStudentView</servlet-name>
         <servlet-class>com.controller.AdminStudentView</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentCountServlet</servlet-name>
+        <servlet-class>com.controller.StudentCountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentLoginServlet</servlet-name>
         <url-pattern>/StudentLoginServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>AdminStudentView</servlet-name>
         <url-pattern>/AdminStudentView</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentCountServlet</servlet-name>
+        <url-pattern>/StudentCountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
