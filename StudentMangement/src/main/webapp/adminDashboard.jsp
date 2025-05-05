@@ -585,8 +585,8 @@
                                             <div class="stat-icon courses">
                                                 <i class="fas fa-book-open"></i>
                                             </div>
-                                            <div class="stat-value"></div>
-                                            <div class="stat-label">${count}Total Courses</div>
+                                            <div class="stat-value">${Ccount}</div>
+                                            <div class="stat-label">Total Courses</div>
                                            
                                            
                                         </div>
@@ -597,9 +597,9 @@
                                             <div class="stat-icon faculty">
                                                 <i class="fas fa-chalkboard-teacher"></i>
                                             </div>
-                                            <!--<div class="stat-value">${sessionScope.admin.totalFaculty}</div>-->
+                                          
                                             
-                                            <div class="stat-value">${total}</div>
+                                            <div class="stat-value">${dcount}</div>
                                             <div class="stat-label">Total Faculty</div>
                                         </div>
                                     </div>

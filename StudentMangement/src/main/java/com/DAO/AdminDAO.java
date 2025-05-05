@@ -92,6 +92,37 @@ return null;
             return 0;
         }
     }
+    
+    
+        public int countAllFaculty() throws SQLException, Exception {
+        String sql = "SELECT COUNT(FacultyID) AS totalF FROM Faculty";
+        
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            
+            if (resultSet.next()) {
+                return resultSet.getInt("totalF");
+            }
+            return 0;
+        }
+    }
+        
+        
+            public int countAllCourse() throws SQLException, Exception {
+        String sql = "SELECT COUNT(CourseID) AS totalcourse FROM Courses";
+        
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            
+            if (resultSet.next()) {
+                return resultSet.getInt("totalcourse");
+            }
+            return 0;
+        }
+    }
+    
 
 
 }

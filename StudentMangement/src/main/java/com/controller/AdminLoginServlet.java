@@ -54,7 +54,13 @@ public class AdminLoginServlet extends HttpServlet {
 
             if (status) {
                 int count=adminDAO.countAllStudents();
+                int dcount=adminDAO.countAllFaculty();
+                int Ccount=adminDAO.countAllCourse();
                 
+                
+                
+                request.setAttribute("dcount", dcount);
+                request.setAttribute("Ccount", Ccount);
                 request.setAttribute("total", count);
                 System.out.println("Test student count: " + count);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDashboard.jsp");
