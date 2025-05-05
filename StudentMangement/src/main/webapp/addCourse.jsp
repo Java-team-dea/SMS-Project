@@ -290,10 +290,12 @@
                     </div>
                     <div class="content-body">
                         <form action="ManageCoursesServlet" method="post">
-                            <div class="mb-3">
-                                <label for="courseCode" class="form-label">Course Code</label>
-                                <input type="text" class="form-control" id="courseCode" name="courseCode" required>
-                            </div>
+<!--                            <div class="mb-3">
+                                <label for="courseID" class="form-label">Course ID</label>
+                                <input type="text" class="form-control" id="courseID" name="courseID" >
+                            </div>-->
+
+
                             <div class="mb-3">
                                 <label for="courseName" class="form-label">Course Name</label>
                                 <input type="text" class="form-control" id="courseName" name="courseName" required>
@@ -302,6 +304,16 @@
                                 <label for="department" class="form-label">Department</label>
                                 <input type="text" class="form-control" id="department" name="department" required>
                             </div>
+                            <div class="mb-4">
+                                <label for="credits" class="form-label">Credits</label>
+                                <input type="number" class="form-control" id="credits" name="credits" required>
+                            </div>
+                            
+                            
+                            <div class="mb-4">
+                                <label for="description" class="form-label">Description</label>
+                        <textarea id="description" name="description" rows="4" cols="50" class="form-control" required></textarea>                            </div>
+                    
                             <div class="mb-4">
                                 <label for="duration" class="form-label">Duration</label>
                                 <input type="text" class="form-control" id="duration" name="duration" required>
