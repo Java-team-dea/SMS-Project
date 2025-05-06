@@ -1,8 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+//conflict must be resolved
 package com.DAO;
-
-
-
-
 import com.model.Student;
 import com.util.Database;
 
@@ -122,7 +123,7 @@ public class StudentDAO {
             if (rowsUpdated > 0) {
                 LOGGER.info("Student profile updated successfully.");
             } else {
-                LOGGER.warning("No student found with ID " + student.getId());
+                LOGGER.log(Level.WARNING, "No student found with ID {0}", student.getId());
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error updating student profile", e);
