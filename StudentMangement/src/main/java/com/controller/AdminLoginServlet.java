@@ -39,6 +39,9 @@ public class AdminLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
+        
+        
         try {
             Admin admin=new Admin();
             admin.setEmail(request.getParameter("email"));
@@ -50,8 +53,16 @@ public class AdminLoginServlet extends HttpServlet {
             boolean status=adminDAO.validateAdmin(admin);
 
             if (status) {
+                int count=adminDAO.countAllStudents();
+                int dcount=adminDAO.countAllFaculty();
+                int Ccount=adminDAO.countAllCourse();
                 
                 
+                
+                request.setAttribute("dcount", dcount);
+                request.setAttribute("Ccount", Ccount);
+                request.setAttribute("total", count);
+                System.out.println("Test student count: " + count);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDashboard.jsp");
                 
                 requestDispatcher.forward(request, response);

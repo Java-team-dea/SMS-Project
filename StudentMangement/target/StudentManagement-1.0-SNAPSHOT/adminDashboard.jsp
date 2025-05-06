@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -569,8 +570,13 @@
                                             <div class="stat-icon students">
                                                 <i class="fas fa-user-graduate"></i>
                                             </div>
-                                            <div class="stat-value">${sessionScope.admin.totalStudents}</div>
-                                            <div class="stat-label">Total Students</div>
+                                            
+                                           
+                                            
+                                            <div class="stat-value">${total}</div>
+                                           
+                                            
+                                            <div class="stat-label">Total Students </div>
                                         </div>
                                     </div>
                                     
@@ -579,8 +585,10 @@
                                             <div class="stat-icon courses">
                                                 <i class="fas fa-book-open"></i>
                                             </div>
-                                            <div class="stat-value">${sessionScope.admin.totalCourses}</div>
+                                            <div class="stat-value">${Ccount}</div>
                                             <div class="stat-label">Total Courses</div>
+                                           
+                                           
                                         </div>
                                     </div>
                                     
@@ -589,7 +597,9 @@
                                             <div class="stat-icon faculty">
                                                 <i class="fas fa-chalkboard-teacher"></i>
                                             </div>
-                                            <div class="stat-value">${sessionScope.admin.totalFaculty}</div>
+                                          
+                                            
+                                            <div class="stat-value">${dcount}</div>
                                             <div class="stat-label">Total Faculty</div>
                                         </div>
                                     </div>
