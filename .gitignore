@@ -1,0 +1,17 @@
+StudentMangement/target/classes/com/controller/AdminLoginServlet.class
+StudentMangement/target/classes/com/controller/AdminStudentView.class
+StudentMangement/target/classes/com/controller/LoginServlet.class
+StudentMangement/target/classes/com/controller/ProfileServlet.class
+StudentMangement/target/classes/com/controller/StudentRegistrationServlet.class
+StudentMangement/target/classes/com/controller/UpdateProfileServlet.class
+StudentMangement/target/classes/com/DAO/AdminDAO.class
+StudentMangement/target/classes/com/DAO/StudentDAO.class
+StudentMangement/target/classes/com/model/Admin.class
+StudentMangement/target/classes/com/model/Student.class
+StudentMangement/target/classes/com/mycompany/studentmanagemen/JakartaRestConfiguration.class
+StudentMangement/target/classes/com/mycompany/studentmanagement/resources/JakartaEE8Resource.class
+StudentMangement/target/classes/com/util/Database.class
+StudentMangement/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+StudentMangement/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+StudentMangement/target/StudentManagement-1.0-SNAPSHOT.war
+StudentMangement/target/StudentManagement-1.0-SNAPSHOT.war
