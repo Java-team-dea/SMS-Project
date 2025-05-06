@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.sql.Date;
 
 @WebServlet("/StudentRegistrationServlet")
 public class StudentRegistrationServlet extends HttpServlet {
@@ -22,13 +23,24 @@ public class StudentRegistrationServlet extends HttpServlet {
             // Create and populate Student object
             Student student = new Student();
             student.setName(request.getParameter("name"));
-            student.setDob(request.getParameter("dob"));
+            
+            // Convert String to Date
+            String dobStr = request.getParameter("dob");
+            String enrollDateStr = request.getParameter("enrollmentDate");
+
+            // Add a check to avoid null or invalid format
+            if (dobStr != null && !dobStr.isEmpty()) {
+                student.setDob(Date.valueOf(dobStr)); // Converts String to java.sql.Date
+            }
+            if (enrollDateStr != null && !enrollDateStr.isEmpty()) {
+                student.setEnrollmentDate(Date.valueOf(enrollDateStr)); // Converts String to java.sql.Date
+            }
+
             student.setGender(request.getParameter("gender"));
             student.setNic(request.getParameter("nic"));
             student.setEmail(request.getParameter("email"));
             student.setPhone(request.getParameter("phone"));
             student.setAddress(request.getParameter("address"));
-            student.setEnrollmentDate(request.getParameter("enrollmentDate"));
             student.setFacultyName(request.getParameter("facultyName"));
             student.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
             student.setPassword(request.getParameter("password"));
@@ -64,6 +76,9 @@ public class StudentRegistrationServlet extends HttpServlet {
         } catch (IOException | NumberFormatException e) {
 // General exception handling to log the issue and display a user-friendly error message
                         response.sendRedirect("registration-failed.jsp?error=exception");
+        } catch (IllegalArgumentException e) {
+// Handling invalid date format
+                        response.sendRedirect("registration-failed.jsp?error=invalidDate");
         }
     }
 }

@@ -4,7 +4,9 @@
  */
 package com.controller;
 
+import com.model.Student;
 import com.util.Database;
+
 import java.io.IOException;
 import java.sql.*;
 import javax.servlet.*;
@@ -17,12 +19,11 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
 
-        // Uncomment and use a secure hashing function in production
-        // String hashedPassword = PasswordUtils.hashPassword(password);
+        // String hashedPassword = PasswordUtils.hashPassword(password); // For production
 
         try (
             Connection conn = Database.getConnection();
@@ -30,17 +31,34 @@ public class LoginServlet extends HttpServlet {
                 "SELECT * FROM students WHERE email = ? AND password = ?")
         ) {
             ps.setString(1, email);
-            ps.setString(2, password); // Replace with hashedPassword when using hashing
+            ps.setString(2, password); // Replace with hashedPassword if using hashing
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String status = rs.getString("status");
 
                     if ("active".equalsIgnoreCase(status)) {
+                        Student student = new Student();
+                        student.setId(rs.getInt("id"));
+                        student.setName(rs.getString("name"));
+                        student.setEmail(rs.getString("email"));
+                        student.setGender(rs.getString("gender"));
+                        student.setDob(rs.getDate("dob"));
+                        student.setNic(rs.getString("nic"));
+                        student.setPhone(rs.getString("phone"));
+                        student.setAddress(rs.getString("address"));
+                        student.setEnrollmentDate(rs.getDate("enrollmentDate"));
+                        student.setFacultyName(rs.getString("facultyName"));
+                        student.setDepartmentID(rs.getInt("departmentID"));
+                        student.setStatus(status);
+
+                        // Optional values for dashboard display
+                        student.setGpa(3.5); // or retrieve if available
+                        student.setCoursesCount(5);
+                        student.setOutstandingFees(0.0);
+
                         HttpSession session = request.getSession();
-                        session.setAttribute("studentId", rs.getInt("id"));
-                        session.setAttribute("studentName", rs.getString("name"));
-                        session.setAttribute("studentEmail", rs.getString("email"));
+                        session.setAttribute("student", student);
 
                         response.sendRedirect("studentDashboard.jsp");
                     } else {
@@ -64,3 +82,4 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("studentLogin.jsp").forward(request, response);
     }
 }
+

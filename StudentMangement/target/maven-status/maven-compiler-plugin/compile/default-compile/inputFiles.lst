@@ -1,11 +1,13 @@
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\controller\AdminStudentView.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\model\Admin.java
-D:\New folder\SMS-Project\StudentMangement\src\main\java\com\DAO\AdminDAO.java
-D:\New folder\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
+D:\New folder\SMS-Project\StudentMangement\src\main\java\com\controller\UpdateProfileServlet.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagement\resources\JakartaEE8Resource.java
-D:\New folder\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagemen\JakartaRestConfiguration.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\controller\LoginServlet.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\model\Student.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\controller\AdminLoginServlet.java
+D:\New folder\SMS-Project\StudentMangement\src\main\java\com\controller\ProfileServlet.java
+D:\New folder\SMS-Project\StudentMangement\src\main\java\com\DAO\AdminDAO.java
+D:\New folder\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
+D:\New folder\SMS-Project\StudentMangement\src\main\java\com\mycompany\studentmanagemen\JakartaRestConfiguration.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\DAO\StudentDAO.java
 D:\New folder\SMS-Project\StudentMangement\src\main\java\com\controller\StudentRegistrationServlet.java

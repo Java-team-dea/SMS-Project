@@ -1,43 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+<web-app version="4.0"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+    <!-- Student Login Servlet -->
     <servlet>
         <servlet-name>StudentLoginServlet</servlet-name>
         <servlet-class>com.controller.StudentLoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminLoginServlet</servlet-name>
-        <servlet-class>com.controller.AdminLoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminStudentView</servlet-name>
-        <servlet-class>com.controller.AdminStudentView</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StudentLoginServlet</servlet-name>
         <url-pattern>/StudentLoginServlet</url-pattern>
     </servlet-mapping>
+
+    <!-- Admin Login Servlet -->
+    <servlet>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <servlet-class>com.controller.AdminLoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginServlet</servlet-name>
         <url-pattern>/AdminLoginServlet</url-pattern>
     </servlet-mapping>
+
+    <!-- Admin View Students Servlet -->
+    <servlet>
+        <servlet-name>AdminStudentView</servlet-name>
+        <servlet-class>com.controller.AdminStudentView</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminStudentView</servlet-name>
         <url-pattern>/AdminStudentView</url-pattern>
     </servlet-mapping>
+
+    <!-- General Login Servlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.controller.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+
+    <!-- Update Profile Servlet -->
+    <servlet>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <servlet-class>com.controller.UpdateProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <url-pattern>/UpdateProfileServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Session Timeout Configuration -->
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
+
+    <!-- Default Welcome Page -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
 </web-app>
