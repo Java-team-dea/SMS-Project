@@ -4,21 +4,35 @@
  */
 package com.model;
 
+import java.sql.Date;
+
 public class Student {
+    private int id;
     private String name;
-    private String dob;
+    private Date dob;
     private String gender;
     private String nic;
     private String email;
     private String phone;
     private String address;
-    private String enrollmentDate;
+    private Date enrollmentDate;
     private String facultyName;
     private int departmentID;
     private String password;
     private String status; // 'active' or 'inactive'
 
+    private double gpa;
+    private int coursesCount;
+    private double outstandingFees;
+
     // Getters and Setters
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() { 
         return name; 
@@ -27,10 +41,10 @@ public class Student {
         this.name = name; 
     }
 
-    public String getDob() { 
+    public Date getDob() { 
         return dob; 
     }
-    public void setDob(String dob) { 
+    public void setDob(Date dob) { 
         this.dob = dob; 
     }
 
@@ -69,10 +83,10 @@ public class Student {
         this.address = address; 
     }
 
-    public String getEnrollmentDate() { 
+    public Date getEnrollmentDate() { 
         return enrollmentDate; 
     }
-    public void setEnrollmentDate(String enrollmentDate) { 
+    public void setEnrollmentDate(Date enrollmentDate) { 
         this.enrollmentDate = enrollmentDate; 
     }
 
@@ -97,16 +111,51 @@ public class Student {
         this.password = password; 
     }
 
-    // ✅ Proper implementation of setStatus and getStatus
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         if (status == null || status.isEmpty()) {
-            this.status = "inactive"; // Default to 'inactive' if no value is provided
+            this.status = "inactive";
         } else {
             this.status = status;
         }
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
+    public int getCoursesCount() {
+        return coursesCount;
+    }
+    public void setCoursesCount(int coursesCount) {
+        this.coursesCount = coursesCount;
+    }
+
+    public double getOutstandingFees() {
+        return outstandingFees;
+    }
+    public void setOutstandingFees(double outstandingFees) {
+        this.outstandingFees = outstandingFees;
+    }
+
+    public void setDepartmentID(String departmentID) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setEnrollmentDate(String enrollmentDate) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setDob(String dob) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setStudentID(int studentID) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

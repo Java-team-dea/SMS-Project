@@ -360,7 +360,7 @@
                     </div>
                     
                     <p class="text-center mt-4 mb-0">
-                        Already have an account? <a href="login.jsp" class="text-decoration-none text-success fw-bold">Login here</a>
+                        Already have an account? <a href="studentLogin.jsp" class="text-decoration-none text-success fw-bold">Login here</a>
                     </p>
                 </form>
             </div>
