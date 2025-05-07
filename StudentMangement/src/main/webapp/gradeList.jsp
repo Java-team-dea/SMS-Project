@@ -82,7 +82,7 @@
         }
 
         .admin-badge {
-            background-color: #3F51B5;
+            background-color: #3949AB;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;
@@ -444,7 +444,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">

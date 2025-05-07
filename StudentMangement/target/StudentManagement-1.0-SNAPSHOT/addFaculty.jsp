@@ -250,24 +250,29 @@
         <header class="app-header py-3">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="index.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                    <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
-                                <p class="university-system">Admin Management System</p>
+                                <p class="university-system">Student Management System</p>
                                 <span class="admin-badge">ADMIN PORTAL</span>
                             </div>
                         </div>
                     </a>
                     
                     <div class="dropdown">
-                        <button class="btn btn-outline-primary dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-shield"></i>
-                            <span class="d-none d-md-inline">Admin</span>
+                        <button class="btn profile-btn dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                    A
+                                </div>
+                                <span class="ms-2 d-none d-md-inline">Admin</span>
+                            </div>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2 text-primary"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="adminProfile.jsp"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2 text-primary"></i> Notifications</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2 text-primary"></i> Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="LogoutServlet"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
@@ -276,7 +281,6 @@
                 </div>
             </div>
         </header>
-
         <!-- Main Content -->
         <main class="content-wrapper">
             <div class="container">
