@@ -50,14 +50,15 @@
             letter-spacing: 0.5px;
         }
         
-        .student-badge {
-            background-color: #2196F3;
-            color: white;
+     .student-badge {
+            background-color: #FF5722;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;
-            margin-left: 0.5rem;
             font-weight: 500;
+            color: white;
+            margin-left: 0.5rem;
+            letter-spacing: 0.5px;
         }
         
         .content-wrapper {

@@ -166,13 +166,14 @@
         }
         
         .badge-admin {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: #3949AB;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;
-            margin-left: 0.5rem;
             font-weight: 500;
+            color: white;
+            margin-left: 0.5rem;
+            letter-spacing: 0.5px;
         }
         
         .floating-help {
