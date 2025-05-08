@@ -11,3 +11,4 @@ com\mycompany\studentmanagement\resources\JakartaEE8Resource.class
 com\DAO\CourseDAO.class
 com\controller\AdminStudentView.class
 com\util\Database.class
+com\controller\CourseViewServlet.class
