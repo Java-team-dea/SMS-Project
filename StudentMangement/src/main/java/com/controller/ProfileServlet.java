@@ -6,12 +6,10 @@ package com.controller;
 
 import com.DAO.StudentDAO;
 import com.model.Student;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/ProfileServlet")
@@ -20,50 +18,68 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Redirect the user to profile.jsp to view their current profile data
-        HttpSession session = request.getSession();
-        Student student = (Student) session.getAttribute("student");
-        
-        // Ensure a student is logged in
+
+        HttpSession session = request.getSession(false);
+        Student student = (session != null) ? (Student) session.getAttribute("student") : null;
+
         if (student != null) {
-            // Forward the request to the JSP page to display the profile
             request.getRequestDispatcher("profile.jsp").forward(request, response);
         } else {
-            // If no student session exists, redirect to login page
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("studentlogin.jsp");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get the logged-in student's session
-        HttpSession session = request.getSession();
-        Student student = (Student) session.getAttribute("student");
 
-        // Retrieve the updated data from the form
+        HttpSession session = request.getSession(false);
+        Student student = (session != null) ? (Student) session.getAttribute("student") : null;
+
+        if (student == null) {
+            response.sendRedirect("studentlogin.jsp");
+            return;
+        }
+
+        // Retrieve form parameters
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
 
-        if (student != null) {
-            // Update the student's details in the session object
-            student.setName(name);
-            student.setEmail(email);
-            student.setPhone(phone);
+        // Basic validation
+        if (name == null || name.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Full name cannot be empty.");
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            return;
+        }
 
-            // Update the student's profile in the database
-            StudentDAO studentDAO = new StudentDAO();
-            studentDAO.updateStudentProfile(student);
+        if (email == null || !email.matches("^\\S+@\\S+\\.\\S+$")) {
+            request.setAttribute("errorMessage", "Invalid email address.");
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            return;
+        }
 
-            // Update the session with the latest student data
+        if (phone == null || !phone.matches("^\\d{10}$")) {
+            request.setAttribute("errorMessage", "Phone number must be 10 digits.");
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            return;
+        }
+
+        // Update student object
+        student.setName(name);
+        student.setEmail(email);
+        student.setPhone(phone);
+
+        // Update in database
+        StudentDAO studentDAO = new StudentDAO();
+        boolean updated = studentDAO.updateStudentProfile(student);
+
+        if (updated) {
             session.setAttribute("student", student);
-
-            // Redirect back to the profile page to show updated details
             response.sendRedirect("profile.jsp");
         } else {
-            // If no student session exists, redirect to login page
-            response.sendRedirect("login.jsp");
+            request.setAttribute("errorMessage", "Profile update failed. Please try again.");
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
         }
     }
 
@@ -72,3 +88,4 @@ public class ProfileServlet extends HttpServlet {
         return "Profile servlet for updating student information";
     }
 }
+

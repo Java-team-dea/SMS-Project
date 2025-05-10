@@ -1,15 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.model.Student"%>
+<c:if test="${empty sessionScope.student}">
+    <c:redirect url="studentLogin.jsp" />
+</c:if>
+
 <%
-    // Retrieve the logged-in student object from the session
-    Student student = (Student) session.getAttribute("student");
-    if (student == null) {
-        // Redirect to login page if no user is logged in
-        response.sendRedirect("studentlogin.jsp");
+    if (session.getAttribute("student") == null) {
+        response.sendRedirect("StudentLogin.jsp");
         return;
     }
 %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+%>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -91,16 +102,16 @@
                 margin-bottom: 0;
             }
 
-           .student-badge {
-            background-color: #FF5722;
-            font-size: 0.7rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 30px;
-            font-weight: 500;
-            color: white;
-            margin-left: 0.5rem;
-            letter-spacing: 0.5px;
-        }
+            .student-badge {
+                background-color: #FF5722;
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 30px;
+                font-weight: 500;
+                color: white;
+                margin-left: 0.5rem;
+                letter-spacing: 0.5px;
+            }
 
             .profile-btn {
                 background-color: var(--light-color);
@@ -347,14 +358,14 @@
             }
         </style>
     </head>
-    <body>
+<body>
         <div class="app-wrapper">
             <!-- Header -->
             <header class="app-header py-3">
                 <div class="container">
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="index.jsp" class="text-decoration-none university-brand">
-                            <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
+                            <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
                             <div>
                                 <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                                 <div class="d-flex align-items-center">
@@ -448,8 +459,6 @@
                                             <input type="date" class="form-control" id="dob" name="dob" value="${student.dob}" required>
                                         </div>
 
-
-
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email Address</label>
                                             <input type="email" class="form-control" id="email" name="email" value="${student.email}" required>
@@ -460,13 +469,11 @@
                                             <input type="text" class="form-control" id="phone" name="phone" value="${student.phone}" required>
                                         </div>
 
-
-
+                                        <!-- Faculty Name (readonly) -->
                                         <div class="mb-3">
                                             <label for="facultyName" class="form-label">Faculty</label>
-                                            <input type="text" class="form-control" id="facultyName" name="facultyName" value="${student.facultyName}" required>
+                                            <input type="text" class="form-control" id="facultyName" name="facultyName" value="${student.facultyName}" readonly>
                                         </div>
-
 
                                         <div class="d-flex gap-2 mt-3">
                                             <button type="submit" class="btn btn-success">
@@ -477,8 +484,6 @@
                                                 <i class="fas fa-lock me-2"></i> Change Password
                                             </a>
                                         </div>
-
-
                                     </form>
                                 </div>
                             </div>

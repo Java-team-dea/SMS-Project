@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -165,15 +166,14 @@
             text-decoration: underline;
         }
         
-       .student-badge {
-            background-color: #FF5722;
+        .badge-student {
+            background-color: #0066cc;
+            color: white;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;
-            font-weight: 500;
-            color: white;
             margin-left: 0.5rem;
-            letter-spacing: 0.5px;
+            font-weight: 500;
         }
 
         .register-link {

@@ -67,7 +67,7 @@ public class StudentRegistrationServlet extends HttpServlet {
             boolean registered = dao.registerStudent(student);
 
             if (registered) {
-                response.sendRedirect("registration-success.jsp");
+                response.sendRedirect("success.jsp");
             } else {
                 // If registration fails due to database issues
                 response.sendRedirect("registration-failed.jsp?error=database");
