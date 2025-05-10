@@ -1,67 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+<web-app version="4.0"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
     <servlet>
         <servlet-name>StudentLoginServlet</servlet-name>
         <servlet-class>com.controller.StudentLoginServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>StudentregistrationServlet</servlet-name>
+        <servlet-class>com.controller.StudentregistrationServlet</servlet-class>
+    </servlet>
+
     <servlet>
         <servlet-name>AdminLoginServlet</servlet-name>
         <servlet-class>com.controller.AdminLoginServlet</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>AdminStudentView</servlet-name>
         <servlet-class>com.controller.AdminStudentView</servlet-class>
     </servlet>
+
     <servlet>
-        <servlet-name>StudentCountServlet</servlet-name>
-        <servlet-class>com.controller.StudentCountServlet</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.controller.LoginServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>CourseAddingServlet</servlet-name>
-        <servlet-class>com.controller.CourseAddingServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ManageCoursesServlet</servlet-name>
-        <servlet-class>com.controller.ManageCoursesServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CourseViewServlet</servlet-name>
-        <servlet-class>com.controller.CourseViewServlet</servlet-class>
-    </servlet>
+
     <servlet-mapping>
         <servlet-name>StudentLoginServlet</servlet-name>
         <url-pattern>/StudentLoginServlet</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>AdminLoginServlet</servlet-name>
         <url-pattern>/AdminLoginServlet</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-        <servlet-name>AdminStudentView</servlet-name>
+        <servlet-name>AdminStudentView</servlet-nam
         <url-pattern>/AdminStudentView</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-        <servlet-name>StudentCountServlet</servlet-name>
-        <url-pattern>/StudentCountServlet</url-pattern>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CourseAddingServlet</servlet-name>
-        <url-pattern>/CourseAddingServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ManageCoursesServlet</servlet-name>
-        <url-pattern>/ManageCoursesServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CourseViewServlet</servlet-name>
-        <url-pattern>/CourseViewServlet</url-pattern>
-    </servlet-mapping>
+
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
 </web-app>
