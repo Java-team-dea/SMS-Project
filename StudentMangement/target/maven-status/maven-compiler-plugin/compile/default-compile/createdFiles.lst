@@ -9,3 +9,4 @@ com\model\Admin.class
 com\DAO\CourseDAO.class
 com\controller\AdminStudentView.class
 com\util\Database.class
+com\controller\CourseViewServlet.class

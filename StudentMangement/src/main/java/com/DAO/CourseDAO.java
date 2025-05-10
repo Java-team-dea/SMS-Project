@@ -8,7 +8,10 @@ import com.model.Courses;
 import com.util.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,6 +38,37 @@ public class CourseDAO {
         preparedStatement.executeUpdate();
     }
 }
+    
+    
+    public ArrayList<Courses> getAllCourses() throws Exception{
+        
+        try{
+            
+            ArrayList<Courses> listCourses = new ArrayList<Courses>();
+            
+            String query = "select CourseID,Name,Duration,Credits from Courses";
+            
+            Statement statement =Database.getConnection().createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            
+            while(rs.next()){
+                Courses courses=new Courses();
+                courses.setName(rs.getString("Name"));
+                courses.setDuration(rs.getInt("Duration"));
+                courses.setCredits(rs.getInt("Credits"));
+//                courses.setCourseID(rs.getInts("CourseID"));
+                listCourses.add(courses);
+
+            }
+          
+           return listCourses; 
+            
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        
+    }
     
     
     

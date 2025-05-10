@@ -13,6 +13,7 @@ public class Courses {
     private String Name;
     private String Description;
     private int Credits;
+    private int CourseID;
     private int Duration;
     private int departmentID;
 ;
@@ -85,6 +86,20 @@ public class Courses {
      */
     public void setDepartmentID(int departmentID) {
         this.departmentID = departmentID;
+    }
+
+    /**
+     * @return the CourseID
+     */
+    public int getCourseID() {
+        return CourseID;
+    }
+
+    /**
+     * @param CourseID the CourseID to set
+     */
+    public void setCourseID(int CourseID) {
+        this.CourseID = CourseID;
     }
 
     
