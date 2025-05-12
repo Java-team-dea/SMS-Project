@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -489,18 +490,22 @@
                                 <a href="adminDashboard.jsp" class="nav-link">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
-                                <a href="studentList.jsp" class="nav-link">
+                                <a href="view" class="nav-link">
                                     <i class="fas fa-user-graduate"></i> Manage Students
                                 </a>
-                                <a href="courseList.jsp" class="nav-link">
+                                <a href="CourseViewServlet" class="nav-link">
                                     <i class="fas fa-book"></i> Manage Courses
                                 </a>
                                 <a href="attendanceList.jsp" class="nav-link">
                                     <i class="fas fa-calendar-check"></i> Manage Attendance
                                 </a>
-                                <a href="gradeList.jsp" class="nav-link active">
+                            
+                                
+                                <a href="gradeList" class="nav-link">
                                     <i class="fas fa-chart-line"></i> Manage Grades
                                 </a>
+                                
+                                
                                 <a href="feeList.jsp" class="nav-link">
                                     <i class="fas fa-money-bill-wave"></i> Manage Fees
                                 </a>
@@ -538,6 +543,10 @@
                                                 There are no grade records available in the system. 
                                                 Click the button below to add a new grade record.
                                             </p>
+                                            
+                                                            
+                                            
+                                            
                                             <a href="addGrade.jsp" class="btn btn-add">
                                                 <i class="fas fa-plus"></i> Add First Grade
                                             </a>
@@ -548,71 +557,45 @@
                                             <table class="table data-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Student Name</th>
-                                                        <th>Course</th>
-                                                        <th>Grade</th>
-                                                        <th class="text-center">Actions</th>
+                                                        <th>ID</th>
+                                                            <th>Student ID</th>
+                                                            <th>Module Code</th>
+                                                            <th>
+                                                                Grade
+                                                            </th>
+                                                            
+                                                            
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach var="grade" items="${gradeList}">
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                                                        <i class="fas fa-user-graduate text-primary"></i>
-                                                                    </div>
-                                                                    <div class="ms-3">
-                                                                        <h6 class="mb-0">${grade.studentName}</h6>
-                                                                        <small class="text-muted">ID: ${grade.studentId}</small>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                                                        <i class="fas fa-book text-primary"></i>
-                                                                    </div>
-                                                                    <div class="ms-3">
-                                                                        <h6 class="mb-0">${grade.course}</h6>
-                                                                        <small class="text-muted">Code: ${grade.courseCode}</small>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <c:choose>
-                                                                    <c:when test="${grade.grade == 'A' || grade.grade == 'A+' || grade.grade == 'A-'}">
-                                                                        <span class="grade-badge grade-a">${grade.grade}</span>
-                                                                    </c:when>
-                                                                    <c:when test="${grade.grade == 'B' || grade.grade == 'B+' || grade.grade == 'B-'}">
-                                                                        <span class="grade-badge grade-b">${grade.grade}</span>
-                                                                    </c:when>
-                                                                    <c:when test="${grade.grade == 'C' || grade.grade == 'C+' || grade.grade == 'C-'}">
-                                                                        <span class="grade-badge grade-c">${grade.grade}</span>
-                                                                    </c:when>
-                                                                    <c:when test="${grade.grade == 'D' || grade.grade == 'D+' || grade.grade == 'D-'}">
-                                                                        <span class="grade-badge grade-d">${grade.grade}</span>
-                                                                    </c:when>
-                                                                    <c:when test="${grade.grade == 'F'}">
-                                                                        <span class="grade-badge grade-f">${grade.grade}</span>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        ${grade.grade}
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <div class="d-flex justify-content-center gap-2">
-                                                                    <a href="editGrade.jsp?id=${grade.id}" class="btn btn-action btn-edit">
-                                                                        <i class="fas fa-edit me-1"></i> Edit
-                                                                    </a>
-                                                                    <a href="deleteGrade?id=${grade.id}" onclick="return confirm('Are you sure you want to delete this grade record?')" class="btn btn-action btn-delete">
-                                                                        <i class="fas fa-trash me-1"></i> Delete
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
+                      
+                                                        <c:forEach var="grade" items="${gradeList}" varStatus="loop">
+                                                            
+                                                             <tr>
+                                                                 <td>${grade.id}</td>
+                                                                <td>${grade.studentid}</td>
+                                                                <td>${grade.moduleid}</td>
+                                                                <td>${grade.grade}</td>
+                                        
+<!--                                            <td class="text-center">
+                                                <a href="editStudent.jsp?id=${grade.id}" class="btn btn-outline-primary btn-sm action-btn me-2">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <a href="deleteStudent?id=${grade.id}" 
+                                                   onclick="return confirm('Are you sure you want to delete this student?')" 
+                                                   class="btn btn-danger btn-sm action-btn">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </a>
+                                            </td>-->
+                                        </tr>
+                                                            
+                                                            
+                                                            
+                          
+                            </c:forEach>
+                                                        
+                                                        
+                                                        
                                                 </tbody>
                                             </table>
                                         </div>

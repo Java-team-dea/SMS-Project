@@ -28,6 +28,14 @@
         <servlet-name>CourseViewServlet</servlet-name>
         <servlet-class>com.controller.CourseViewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageGradesServlet</servlet-name>
+        <servlet-class>com.controller.ManageGradesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GradeViewServlet</servlet-name>
+        <servlet-class>com.controller.GradeViewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentLoginServlet</servlet-name>
         <url-pattern>/StudentLoginServlet</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>CourseViewServlet</servlet-name>
         <url-pattern>/CourseViewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageGradesServlet</servlet-name>
+        <url-pattern>/ManageGradesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradeViewServlet</servlet-name>
+        <url-pattern>/GradeViewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

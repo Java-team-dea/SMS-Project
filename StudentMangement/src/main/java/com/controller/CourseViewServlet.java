@@ -36,7 +36,20 @@ public class CourseViewServlet extends HttpServlet {
             throws ServletException, IOException {
         
         
-        
+            CourseDAO courseDAO =new CourseDAO();
+        try {
+            ArrayList<Courses> course=courseDAO.getAllCourses();
+            request.setAttribute("courseList", course);
+            
+            RequestDispatcher dispatcher =request.getRequestDispatcher("courseList.jsp");
+            dispatcher.forward(request, response);
+            
+            
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            
+        }
         
     }
 
