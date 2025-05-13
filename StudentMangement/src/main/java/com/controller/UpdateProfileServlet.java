@@ -6,74 +6,139 @@ package com.controller;
 
 import com.DAO.StudentDAO;
 import com.model.Student;
-
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/UpdateProfileServlet")
+/**
+ * Handles student profile updates
+ */
+@WebServlet(name = "UpdateProfileServlet", urlPatterns = {"/UpdateProfileServlet"})
 public class UpdateProfileServlet extends HttpServlet {
+    
+    private static final Logger LOGGER = Logger.getLogger(UpdateProfileServlet.class.getName());
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Ensure session exists and user is logged in
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("student") == null) {
-            response.sendRedirect("login.jsp");
+        
+        HttpSession session = request.getSession();
+        Student sessionStudent = (Student) session.getAttribute("student");
+        
+        // Security check - only allow updates if user is logged in
+        if (sessionStudent == null) {
+            response.sendRedirect("studentLogin.jsp");
             return;
         }
-
-        // Get logged-in student
-        Student currentStudent = (Student) session.getAttribute("student");
-        int studentId = currentStudent.getId();
-
-        // Get updated values from form
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-
-        // DAO instance
-        StudentDAO dao = new StudentDAO();
-
-        // Check for duplicates in database excluding current student
-        if (dao.isEmailTakenByOthers(email, studentId)) {
-            request.setAttribute("error", "Email is already used by another student.");
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
-            return;
+        
+        try {
+            // Get the student ID from the form
+            String idParam = request.getParameter("id");
+            int studentId = 0;
+            
+            try {
+                if (idParam != null && !idParam.isEmpty()) {
+                    studentId = Integer.parseInt(idParam);
+                }
+            } catch (NumberFormatException e) {
+                LOGGER.log(Level.WARNING, "Invalid student ID format", e);
+                session.setAttribute("errorMessage", "Invalid student ID");
+                response.sendRedirect("profile.jsp");
+                return;
+            }
+            
+            // Another security check - ensure the student can only update their own profile
+            if (studentId != sessionStudent.getStudentID()) {
+                LOGGER.log(Level.WARNING, "Attempt to update different student ID. Session ID: {0}, Requested ID: {1}", 
+                        new Object[]{sessionStudent.getStudentID(), studentId});
+                session.setAttribute("errorMessage", "Unauthorized operation");
+                response.sendRedirect("profile.jsp");
+                return;
+            }
+            
+            // Get form parameters
+            String name = request.getParameter("name");
+            String dobStr = request.getParameter("dob");
+            String phone = request.getParameter("phone");
+            
+            // Validate input data
+            if (name == null || name.trim().isEmpty() || 
+                dobStr == null || dobStr.trim().isEmpty() || 
+                phone == null || phone.trim().isEmpty()) {
+                
+                session.setAttribute("errorMessage", "All fields are required");
+                response.sendRedirect("profile.jsp");
+                return;
+            }
+            
+            // Parse date of birth
+            Date dob = null;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dob = sdf.parse(dobStr);
+            } catch (ParseException e) {
+                LOGGER.log(Level.WARNING, "Invalid date format", e);
+                session.setAttribute("errorMessage", "Invalid date format");
+                response.sendRedirect("profile.jsp");
+                return;
+            }
+            
+            // Create a student object with the updated information
+            Student updatedStudent = new Student();
+            updatedStudent.setStudentID(studentId);
+            updatedStudent.setName(name);
+            updatedStudent.setDateOfBirth(dob);
+            updatedStudent.setPhone(phone);
+            
+            // Update the student profile in the database
+            StudentDAO studentDAO = new StudentDAO();
+            boolean updateSuccess = studentDAO.updateProfile(updatedStudent);
+            
+            if (updateSuccess) {
+                // Update session data with new values
+                sessionStudent.setName(name);
+                sessionStudent.setDateOfBirth(dob);
+                sessionStudent.setPhone(phone);
+                
+                session.setAttribute("student", sessionStudent);
+                session.setAttribute("successMessage", "Profile updated successfully");
+            } else {
+                session.setAttribute("errorMessage", "Failed to update profile");
+            }
+            
+            response.sendRedirect("profile.jsp");
+            
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error updating profile", e);
+            session.setAttribute("errorMessage", "An error occurred: " + e.getMessage());
+            response.sendRedirect("profile.jsp");
         }
+    }
 
-        if (dao.isPhoneTakenByOthers(phone, studentId)) {
-            request.setAttribute("error", "Phone number is already used by another student.");
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
-            return;
-        }
-
-        if (dao.isNameTakenByOthers(name, studentId)) {
-            request.setAttribute("error", "Name is already taken by another student.");
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
-            return;
-        }
-
-        // Update the student object
-        currentStudent.setName(name);
-        currentStudent.setEmail(email);
-        currentStudent.setPhone(phone);
-
-        // Perform update in the database
-        boolean success = dao.updateStudentProfile(currentStudent);
-
-        if (success) {
-            // Refresh session object with updated data
-            session.setAttribute("student", currentStudent);
-            request.setAttribute("message", "Profile updated successfully.");
-        } else {
-            request.setAttribute("error", "Failed to update profile.");
-        }
-
-        // Forward back to profile.jsp
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Handles student profile updates";
     }
 }

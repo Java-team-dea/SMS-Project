@@ -483,7 +483,7 @@
                                 <a href="studentDashboard.jsp" class="nav-link">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
-                                <a href="myCourses.jsp" class="nav-link active">
+                                <a href="MyCoursesServlet" class="nav-link active">
                                     <i class="fas fa-book"></i> My Courses
                                 </a>
                                 <a href="myAttendance.jsp" class="nav-link">
@@ -532,7 +532,7 @@
                             <div class="dashboard-body">
                                 <div class="table-responsive">
                                     <c:choose>
-                                        <c:when test="${not empty sessionScope.student.courses}">
+                                        <c:when test="${not empty sessionScope.studentCourses}">
                                             <table class="table course-table mb-0">
                                                 <thead>
                                                     <tr>
@@ -543,7 +543,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach var="course" items="${sessionScope.student.courses}">
+                                                    <c:forEach var="course" items="${sessionScope.studentCourses}">
                                                         <tr>
                                                             <td>
                                                                 <div class="d-flex align-items-center">

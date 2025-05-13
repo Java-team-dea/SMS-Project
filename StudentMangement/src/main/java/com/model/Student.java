@@ -4,158 +4,243 @@
  */
 package com.model;
 
-import java.sql.Date;
+import java.util.Date;
 
+/**
+ * Student model class representing the Student table in the database
+ * with additional properties for dashboard display
+ */
 public class Student {
-    private int id;
+    // Core database properties
+    private int studentID;
     private String name;
-    private Date dob;
+    private Date dateOfBirth;
     private String gender;
     private String nic;
     private String email;
     private String phone;
     private String address;
     private Date enrollmentDate;
-    private String facultyName;
+    private int facultyID;
     private int departmentID;
+    private int courseID;
     private String password;
-    private String status; // 'active' or 'inactive'
+    private Date registrationDate;
+    
+    // Additional properties for dashboard display
+    private int coursesCount;    // Number of courses enrolled
+    private double gpa;          // Current GPA
+    private String outstandingFees; // Outstanding fees (formatted as currency)
+    
+    // Additional display properties
+    private String facultyName;  // Faculty name for display purposes
+    private String departmentName; // Department name for display purposes
+    private String courseName;   // Course name for display purposes
 
-    private double gpa;
-    private int coursesCount;
-    private double outstandingFees;
-
-    // Getters and Setters
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() { 
-        return name; 
-    }
-    public void setName(String name) { 
-        this.name = name; 
+    // Default constructor
+    public Student() {
     }
 
-    public Date getDob() { 
-        return dob; 
-    }
-    public void setDob(Date dob) { 
-        this.dob = dob; 
-    }
-
-    public String getGender() { 
-        return gender; 
-    }
-    public void setGender(String gender) { 
-        this.gender = gender; 
-    }
-
-    public String getNic() { 
-        return nic; 
-    }
-    public void setNic(String nic) { 
-        this.nic = nic; 
+    // Parameterized constructor
+    public Student(String name, Date dateOfBirth, String gender, String nic, String email, String phone,
+                  String address, Date enrollmentDate, int facultyID, int departmentID, int courseID, String password) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.nic = nic;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.enrollmentDate = enrollmentDate;
+        this.facultyID = facultyID;
+        this.departmentID = departmentID;
+        this.courseID = courseID;
+        this.password = password;
     }
 
-    public String getEmail() { 
-        return email; 
-    }
-    public void setEmail(String email) { 
-        this.email = email; 
+    // Getters and Setters for core properties
+    public int getStudentID() {
+        return studentID;
     }
 
-    public String getPhone() { 
-        return phone; 
-    }
-    public void setPhone(String phone) { 
-        this.phone = phone; 
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
-    public String getAddress() { 
-        return address; 
-    }
-    public void setAddress(String address) { 
-        this.address = address; 
+    public String getName() {
+        return name;
     }
 
-    public Date getEnrollmentDate() { 
-        return enrollmentDate; 
-    }
-    public void setEnrollmentDate(Date enrollmentDate) { 
-        this.enrollmentDate = enrollmentDate; 
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFacultyName() { 
-        return facultyName; 
-    }
-    public void setFacultyName(String facultyName) { 
-        this.facultyName = facultyName; 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public int getDepartmentID() { 
-        return departmentID; 
-    }
-    public void setDepartmentID(int departmentID) { 
-        this.departmentID = departmentID; 
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getPassword() { 
-        return password; 
-    }
-    public void setPassword(String password) { 
-        this.password = password; 
+    public String getGender() {
+        return gender;
     }
 
-    public String getStatus() {
-        return status;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
-    public void setStatus(String status) {
-        if (status == null || status.isEmpty()) {
-            this.status = "inactive";
-        } else {
-            this.status = status;
-        }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getEnrollmentDate() {
+        return enrollmentDate;
+    }
+
+    public void setEnrollmentDate(Date enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
+    }
+
+    public int getFacultyID() {
+        return facultyID;
+    }
+
+    public void setFacultyID(int facultyID) {
+        this.facultyID = facultyID;
+    }
+
+    public int getDepartmentID() {
+        return departmentID;
+    }
+
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    // Getters and Setters for dashboard display properties
+    public int getCoursesCount() {
+        return coursesCount;
+    }
+
+    public void setCoursesCount(int coursesCount) {
+        this.coursesCount = coursesCount;
     }
 
     public double getGpa() {
         return gpa;
     }
+
     public void setGpa(double gpa) {
         this.gpa = gpa;
     }
 
-    public int getCoursesCount() {
-        return coursesCount;
-    }
-    public void setCoursesCount(int coursesCount) {
-        this.coursesCount = coursesCount;
-    }
-
-    public double getOutstandingFees() {
+    public String getOutstandingFees() {
         return outstandingFees;
     }
-    public void setOutstandingFees(double outstandingFees) {
+
+    public void setOutstandingFees(String outstandingFees) {
         this.outstandingFees = outstandingFees;
     }
-
-    public void setDepartmentID(String departmentID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    // Getters and setters for display properties
+    public String getFacultyName() {
+        return facultyName;
     }
 
-    public void setEnrollmentDate(String enrollmentDate) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
     }
 
-    public void setDob(String dob) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setStudentID(int studentID) {
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentID=" + studentID +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", enrollmentDate=" + enrollmentDate +
+                ", facultyID=" + facultyID +
+                ", facultyName='" + facultyName + '\'' +
+                ", departmentID=" + departmentID +
+                ", departmentName='" + departmentName + '\'' +
+                ", courseID=" + courseID +
+                ", courseName='" + courseName + '\'' +
+                ", coursesCount=" + coursesCount +
+                ", gpa=" + gpa +
+                ", outstandingFees='" + outstandingFees + '\'' +
+                '}';
+    }
+
+    public void setId(int aInt) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
