@@ -338,6 +338,7 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col" class="text-center">Actions</th>
                                     </tr>
@@ -350,7 +351,8 @@
                                     
                                     <c:forEach var="student" items="${studentList}">
                                         <tr>
-
+                                            
+                                            <td>${student.id}</td>
                                             <td>${student.name}</td>
                                             <td>${student.email}</td>
                                              <td>${student.phone}</td>

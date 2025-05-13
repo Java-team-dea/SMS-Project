@@ -522,18 +522,24 @@
                                 <a href="adminDashboard.jsp" class="nav-link active">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
-                                <a href="studentList.jsp" class="nav-link">
+
+                                
+                                     <a href="view" class="nav-link">
                                     <i class="fas fa-user-graduate"></i> Manage Students
-                                </a>
-                                <a href="courseList.jsp" class="nav-link">
+                                </a>  
+                        
+                                    <a href="CourseViewServlet" class="nav-link">
                                     <i class="fas fa-book"></i> Manage Courses
                                 </a>
+                                
                                 <a href="attendanceList.jsp" class="nav-link">
                                     <i class="fas fa-calendar-check"></i> Manage Attendance
                                 </a>
-                                <a href="gradeList.jsp" class="nav-link">
+                          
+                                <a href="gradeList" class="nav-link">
                                     <i class="fas fa-chart-line"></i> Manage Grades
                                 </a>
+                                
                                 <a href="feeList.jsp" class="nav-link">
                                     <i class="fas fa-money-bill-wave"></i> Manage Fees
                                 </a>
@@ -610,7 +616,7 @@
                                     <h4><i class="fas fa-cogs me-2"></i> Management Tools</h4>
                                 </div>
                                 <div class="management-grid">
-                                    <a href="studentList.jsp" class="management-card text-decoration-none">
+                                    <a href="view" class="management-card text-decoration-none">
                                         <div class="management-icon">
                                             <i class="fas fa-user-graduate"></i>
                                         </div>
@@ -619,7 +625,7 @@
                                         </div>
                                     </a>
                                     
-                                    <a href="courseList.jsp" class="management-card text-decoration-none">
+                                    <a href="CourseViewServlet" class="management-card text-decoration-none">
                                         <div class="management-icon">
                                             <i class="fas fa-book"></i>
                                         </div>
@@ -637,7 +643,16 @@
                                         </div>
                                     </a>
                                     
-                                    <a href="gradeList.jsp" class="management-card text-decoration-none">
+<!--                                    <a href="gradeList.jsp" class="management-card text-decoration-none">
+                                        <div class="management-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="management-content">
+                                            <h6>Manage Grades</h6>
+                                        </div>
+                                    </a>-->
+                                    
+                                       <a href="gradeList" class="management-card text-decoration-none">
                                         <div class="management-icon">
                                             <i class="fas fa-chart-line"></i>
                                         </div>
@@ -645,6 +660,7 @@
                                             <h6>Manage Grades</h6>
                                         </div>
                                     </a>
+                                    
                                     
                                     <a href="feeList.jsp" class="management-card text-decoration-none">
                                         <div class="management-icon">

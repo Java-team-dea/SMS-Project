@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/view")
 @WebServlet(name = "ViewServlet", urlPatterns = {"/view", "/view/*"})
 public class AdminStudentView extends HttpServlet {
 
@@ -26,6 +25,13 @@ public class AdminStudentView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+           AdminDAO adminDAO = new AdminDAO();
+        ArrayList<Student> student = adminDAO.getAllStudent();
+        request.setAttribute("studentList", student);
+
+        RequestDispatcher dispacher = request.getRequestDispatcher("studentList.jsp");
+        dispacher.forward(request, response);
+        
     }
 
     @Override

@@ -309,14 +309,27 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="courseId" class="form-label">Course ID:</label>
-                                <input type="text" id="courseId" name="courseId" class="form-control" required>
+                                <label for="moduleid" class="form-label">Module ID:</label>
+                                <input type="text" id="moduleid" name="moduleid" class="form-control" required>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="grade" class="form-label">Grade:</label>
-                                <input type="text" id="grade" name="grade" class="form-control" required>
-                            </div>
+<!--                             <div class="form-group">
+                                <label for="module" class="form-label">Module Name</label>
+                                <input type="text" id="module" name="module" class="form-control" required>
+                            </div>-->
+                            
+                            
+                    <div class="form-group">
+                        <label for="grade" class="form-label">Grade:</label>
+                        <select id="grade" name="grade" class="form-control" required>
+                            <option value="" selected disabled>Select a grade</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
                             
                             <div class="d-flex justify-content-between align-items-center mt-4">
                                 <a href="gradeList.jsp" class="btn btn-link">

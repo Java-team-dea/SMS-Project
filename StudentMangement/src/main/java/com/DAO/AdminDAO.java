@@ -51,7 +51,7 @@ public class AdminDAO {
 
             while (rs.next()) {
                 Student student = new Student();
-
+                student.setId(rs.getInt("id"));
                 student.setName(rs.getString("name"));
                 student.setEmail(rs.getString("email"));
                 student.setPhone(rs.getString("phone"));
