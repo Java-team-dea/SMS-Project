@@ -88,4 +88,3 @@ public class ProfileServlet extends HttpServlet {
         return "Profile servlet for updating student information";
     }
 }
-

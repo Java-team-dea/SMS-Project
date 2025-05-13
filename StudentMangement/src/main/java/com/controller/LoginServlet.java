@@ -4,82 +4,90 @@
  */
 package com.controller;
 
+import com.DAO.StudentDAO;
 import com.model.Student;
-import com.util.Database;
-
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Servlet to handle student login
+ */
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    
+    public LoginServlet() {
+        super();
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-
-        String email = request.getParameter("email").trim();
-        String password = request.getParameter("password").trim();
-
-        // String hashedPassword = PasswordUtils.hashPassword(password); // For production
-
-        try (
-            Connection conn = Database.getConnection();
-            PreparedStatement ps = conn.prepareStatement(
-                "SELECT * FROM students WHERE email = ? AND password = ?")
-        ) {
-            ps.setString(1, email);
-            ps.setString(2, password); // Replace with hashedPassword if using hashing
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    String status = rs.getString("status");
-
-                    if ("active".equalsIgnoreCase(status)) {
-                        Student student = new Student();
-                        student.setId(rs.getInt("id"));
-                        student.setName(rs.getString("name"));
-                        student.setEmail(rs.getString("email"));
-                        student.setGender(rs.getString("gender"));
-                        student.setDob(rs.getDate("dob"));
-                        student.setNic(rs.getString("nic"));
-                        student.setPhone(rs.getString("phone"));
-                        student.setAddress(rs.getString("address"));
-                        student.setEnrollmentDate(rs.getDate("enrollmentDate"));
-                        student.setFacultyName(rs.getString("facultyName"));
-                        student.setDepartmentID(rs.getInt("departmentID"));
-                        student.setStatus(status);
-
-                        // Optional values for dashboard display
-                        student.setGpa(3.5); // or retrieve if available
-                        student.setCoursesCount(5);
-                        student.setOutstandingFees(0.0);
-
-                        HttpSession session = request.getSession();
-                        session.setAttribute("student", student);
-
-                        response.sendRedirect("studentDashboard.jsp");
-                    } else {
-                        forwardWithError(request, response, "Your account is not active. Please contact support.", email);
-                    }
-                } else {
-                    forwardWithError(request, response, "Invalid email or password.", email);
-                }
+        
+        // Get or create a session
+        HttpSession session = request.getSession();
+        
+        try {
+            // Clear any previous error messages
+            session.removeAttribute("loginError");
+            
+            // Get form parameters and trim whitespace
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            
+            LOGGER.log(Level.INFO, "Login attempt for email: {0}", email);
+            
+            // Validate inputs
+            if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+                session.setAttribute("loginError", "Email and password are required!");
+                response.sendRedirect("studentLogin.jsp");
+                return;
             }
-
+            
+            // Create StudentDAO instance
+            StudentDAO studentDAO = new StudentDAO();
+            
+            // Authenticate student
+            Student student = studentDAO.authenticate(email.trim(), password.trim());
+            
+            if (student != null) {
+                // Login successful
+                LOGGER.log(Level.INFO, "Login successful for student ID: {0}", student.getStudentID());
+                
+                // Store the student object in the session with the key "student"
+                session.setAttribute("student", student);
+                
+                // Redirect to dashboard
+                response.sendRedirect("studentDashboard.jsp");
+            } else {
+                // Login failed
+                LOGGER.log(Level.WARNING, "Login failed for email: {0}", email);
+                session.setAttribute("loginError", "Invalid email or password!");
+                response.sendRedirect("studentLogin.jsp");
+            }
+            
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Login failed for email: " + email, e);
-            forwardWithError(request, response, "An error occurred. Please try again later.", email);
+            // Log the exception
+            LOGGER.log(Level.SEVERE, "Exception during login process", e);
+            
+            // General error
+            session.setAttribute("loginError", "An error occurred: " + e.getMessage());
+            response.sendRedirect("studentLogin.jsp");
         }
     }
-
-    private void forwardWithError(HttpServletRequest request, HttpServletResponse response, String errorMessage, String email)
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        request.setAttribute("errorMessage", errorMessage);
-        request.setAttribute("enteredEmail", email);
-        request.getRequestDispatcher("studentLogin.jsp").forward(request, response);
+        // Redirect GET requests to the login page
+        response.sendRedirect("studentLogin.jsp");
     }
 }
-
