@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -196,7 +193,7 @@
                         
                         <!-- Name Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                            <input type="text" class="form-control" id="name" name="Name" placeholder="Full Name" required>
                             <label for="name">Full Name</label>
                             <i class="fas fa-user input-icon"></i>
                             <div class="invalid-feedback">
@@ -206,7 +203,7 @@
                         
                         <!-- Date of Birth Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="date" class="form-control" id="dob" name="dob" required>
+                            <input type="date" class="form-control" id="dob" name="DateOfBirth" required>
                             <label for="dob">Date of Birth</label>
                             <i class="fas fa-calendar-alt input-icon"></i>
                             <div class="invalid-feedback">
@@ -219,15 +216,15 @@
                             <label class="form-label">Gender</label>
                             <div class="d-flex">
                                 <div class="form-check me-3">
-                                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                                    <input class="form-check-input" type="radio" name="Gender" id="male" value="Male" required>
                                     <label class="form-check-label" for="male">Male</label>
                                 </div>
                                 <div class="form-check me-3">
-                                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                                    <input class="form-check-input" type="radio" name="Gender" id="female" value="Female">
                                     <label class="form-check-label" for="female">Female</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                                    <input class="form-check-input" type="radio" name="Gender" id="other" value="Other">
                                     <label class="form-check-label" for="other">Other</label>
                                 </div>
                             </div>
@@ -238,7 +235,7 @@
                         
                         <!-- NIC Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="text" class="form-control" id="nic" name="nic" placeholder="NIC Number" required>
+                            <input type="text" class="form-control" id="nic" name="NIC" placeholder="NIC Number" required>
                             <label for="nic">NIC Number</label>
                             <i class="fas fa-id-card input-icon"></i>
                             <div class="invalid-feedback">
@@ -253,7 +250,7 @@
                         
                         <!-- Email Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                            <input type="email" class="form-control" id="email" name="Email" placeholder="name@example.com" required>
                             <label for="email">Email address</label>
                             <i class="fas fa-envelope input-icon"></i>
                             <div class="invalid-feedback">
@@ -263,7 +260,7 @@
                         
                         <!-- Phone Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+                            <input type="tel" class="form-control" id="phone" name="Phone" placeholder="Phone Number">
                             <label for="phone">Phone Number</label>
                             <i class="fas fa-phone-alt input-icon"></i>
                             <div class="invalid-feedback">
@@ -273,7 +270,7 @@
                         
                         <!-- Address Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <textarea class="form-control" id="address" name="address" placeholder="Address" style="height: 100px"></textarea>
+                            <textarea class="form-control" id="address" name="Address" placeholder="Address" style="height: 100px"></textarea>
                             <label for="address">Address</label>
                             <i class="fas fa-home input-icon"></i>
                         </div>
@@ -285,7 +282,7 @@
                         
                         <!-- Enrollment Date Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="date" class="form-control" id="enrollmentDate" name="enrollmentDate" required>
+                            <input type="date" class="form-control" id="enrollmentDate" name="EnrollmentDate" required>
                             <label for="enrollmentDate">Enrollment Date</label>
                             <i class="fas fa-calendar-check input-icon"></i>
                             <div class="invalid-feedback">
@@ -295,13 +292,13 @@
                         
                         <!-- Faculty Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <select class="form-select" id="faculty" name="facultyName" required>
+                            <select class="form-select" id="faculty" name="FacultyID" required>
                                 <option value="" selected disabled>Select your faculty</option>
-                                <option value="Faculty of Business">Faculty of Business</option>
-                                <option value="Faculty of Computing">Faculty of Computing</option>
-                                <option value="Faculty of Engineering">Faculty of Engineering</option>
-                                <option value="Faculty of Science">Faculty of Science</option>
-                                <option value="Faculty of Humanities & Social Sciences">Faculty of Humanities & Social Sciences</option>
+                                <option value="1">Faculty of Business</option>
+                                <option value="2">Faculty of Computing</option>
+                                <option value="3">Faculty of Engineering</option>
+                                <option value="4">Faculty of Science</option>
+                                <option value="5">Faculty of Humanities & Social Sciences</option>
                             </select>
                             <label for="faculty">Faculty</label>
                             <i class="fas fa-university input-icon"></i>
@@ -312,18 +309,27 @@
                         
                         <!-- Department Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <select class="form-select" id="department" name="departmentID" required>
+                            <select class="form-select" id="department" name="DepartmentID" required>
                                 <option value="" selected disabled>Select your department</option>
-                                <option value="1">Computing & Information Systems</option>
-                                <option value="2">Business Management</option>
-                                <option value="3">Engineering</option>
-                                <option value="4">Science & Technology</option>
-                                <option value="5">Design & Architecture</option>
+                                <!-- Departments will be populated dynamically based on faculty selection -->
                             </select>
                             <label for="department">Department</label>
                             <i class="fas fa-building input-icon"></i>
                             <div class="invalid-feedback">
                                 Please select your department.
+                            </div>
+                        </div>
+                        
+                        <!-- Course Field -->
+                        <div class="form-floating mb-3 position-relative">
+                            <select class="form-select" id="course" name="CourseID" required>
+                                <option value="" selected disabled>Select your course</option>
+                                <!-- Courses will be populated dynamically based on department selection -->
+                            </select>
+                            <label for="course">Course</label>
+                            <i class="fas fa-book input-icon"></i>
+                            <div class="invalid-feedback">
+                                Please select your course.
                             </div>
                         </div>
                     </div>
@@ -334,7 +340,7 @@
                         
                         <!-- Password Field -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="8">
+                            <input type="password" class="form-control" id="password" name="Password" placeholder="Password" required minlength="8">
                             <label for="password">Password</label>
                             <i class="fas fa-lock input-icon toggle-password"></i>
                             <div class="invalid-feedback">
@@ -372,7 +378,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="small mb-0">Â© 2025 NSBM Green University. All Rights Reserved.</p>
+                    <p class="small mb-0">© 2025 NSBM Green University. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
                     <div class="social-icons">
@@ -439,33 +445,116 @@
             });
         });
         
+        // Faculty and department mapping from database
+        const facultyDepartments = {
+            "1": [ // Faculty of Business
+                { id: "2", name: "Business Management" },
+                { id: "8", name: "Marketing" },
+                { id: "9", name: "Finance" }
+            ],
+            "2": [ // Faculty of Computing
+                { id: "1", name: "Computing & Information Systems" },
+                { id: "6", name: "Data Science" },
+                { id: "7", name: "Software Engineering" }
+            ],
+            "3": [ // Faculty of Engineering
+                { id: "3", name: "Engineering" },
+                { id: "10", name: "Civil Engineering" },
+                { id: "11", name: "Electrical Engineering" }
+            ],
+            "4": [ // Faculty of Science
+                { id: "4", name: "Science & Technology" },
+                { id: "12", name: "Biotechnology" }
+            ],
+            "5": [ // Faculty of Humanities & Social Sciences
+                { id: "5", name: "Design & Architecture" },
+                { id: "13", name: "Languages" }
+            ]
+        };
+        
+        // Course mapping from database
+        const departmentCourses = {
+            "1": [ // Computing & Information Systems
+                { id: "1", name: "BSc (Hons) in Computer Science" },
+                { id: "2", name: "BSc (Hons) in Computer Science top up" },
+                { id: "3", name: "Bachelor of Information Technology" }
+            ],
+            "2": [ // Business Management
+                { id: "6", name: "Postgraduate Diploma in Project Management" },
+                { id: "7", name: "Master of Business Studies (MBS)" },
+                { id: "8", name: "Postgraduate Diploma In Human Resource Management" }
+            ],
+            "3": [ // Engineering
+                { id: "11", name: "Bachelor of Science of Engineering Honours in Mechatronic Engineering" },
+                { id: "12", name: "Bachelor of Science of Engineering" }
+            ],
+            "4": [ // Science & Technology
+                { id: "15", name: "BSc in General Science" }
+            ],
+            "5": [ // Design & Architecture
+                { id: "19", name: "Bachelor of Interior Design" },
+                { id: "20", name: "BSc (Hons) Architecture" }
+            ],
+            "6": [ // Data Science
+                { id: "4", name: "BSc in Data Science" }
+            ],
+            "7": [ // Software Engineering
+                { id: "5", name: "BSc (Hons) in Software Engineering" }
+            ],
+            "8": [ // Marketing
+                { id: "9", name: "Bachelor of Marketing" }
+            ],
+            "9": [ // Finance
+                { id: "10", name: "Bachelor of Finance" }
+            ],
+            "10": [ // Civil Engineering
+                { id: "13", name: "BSc in Civil Engineering" }
+            ],
+            "11": [ // Electrical Engineering
+                { id: "14", name: "BSc in Electrical Engineering" }
+            ],
+            "12": [ // Biotechnology
+                { id: "16", name: "BSc (Hons) in Biomedical Science" },
+                { id: "17", name: "BSc (Honours) in Pharmaceutical Science" },
+                { id: "18", name: "BSc (Hons) Nutrition and Health" }
+            ],
+            "13": [ // Languages
+                { id: "21", name: "BA in English Language & Literature" },
+                { id: "22", name: "BA in Linguistics" }
+            ]
+        };
+        
         // Faculty selection will populate department options
         document.getElementById('faculty').addEventListener('change', function() {
-            const faculty = this.value;
+            const facultyID = this.value;
             const departmentSelect = document.getElementById('department');
+            const courseSelect = document.getElementById('course');
             
             // Clear current options
             departmentSelect.innerHTML = '<option value="" selected disabled>Select your department</option>';
+            courseSelect.innerHTML = '<option value="" selected disabled>Select your course</option>';
             
             // Add relevant departments based on faculty selection
-            if (faculty === 'Faculty of Computing') {
-                addOption(departmentSelect, '1', 'Computing & Information Systems');
-                addOption(departmentSelect, '6', 'Data Science');
-                addOption(departmentSelect, '7', 'Software Engineering');
-            } else if (faculty === 'Faculty of Business') {
-                addOption(departmentSelect, '2', 'Business Management');
-                addOption(departmentSelect, '8', 'Marketing');
-                addOption(departmentSelect, '9', 'Finance');
-            } else if (faculty === 'Faculty of Engineering') {
-                addOption(departmentSelect, '3', 'Engineering');
-                addOption(departmentSelect, '10', 'Civil Engineering');
-                addOption(departmentSelect, '11', 'Electrical Engineering');
-            } else if (faculty === 'Faculty of Science') {
-                addOption(departmentSelect, '4', 'Science & Technology');
-                addOption(departmentSelect, '12', 'Biotechnology');
-            } else if (faculty === 'Faculty of Humanities & Social Sciences') {
-                addOption(departmentSelect, '5', 'Design & Architecture');
-                addOption(departmentSelect, '13', 'Languages');
+            if (facultyDepartments[facultyID]) {
+                facultyDepartments[facultyID].forEach(dept => {
+                    addOption(departmentSelect, dept.id, dept.name);
+                });
+            }
+        });
+        
+        // Department selection will populate course options
+        document.getElementById('department').addEventListener('change', function() {
+            const departmentID = this.value;
+            const courseSelect = document.getElementById('course');
+            
+            // Clear current options
+            courseSelect.innerHTML = '<option value="" selected disabled>Select your course</option>';
+            
+            // Add relevant courses based on department selection
+            if (departmentCourses[departmentID]) {
+                departmentCourses[departmentID].forEach(course => {
+                    addOption(courseSelect, course.id, course.name);
+                });
             }
         });
         
@@ -475,18 +564,17 @@
             option.textContent = text;
             selectElement.appendChild(option);
         }
-// Restrict enrollmentDate to today only
-  // Allow only today's date in the enrollment date field
-    document.addEventListener('DOMContentLoaded', function () {
-        const enrollmentDateField = document.getElementById('enrollmentDate');
-        const today = new Date().toISOString().split('T')[0];
         
-        // Set both min and max to today's date
-        enrollmentDateField.setAttribute('min', today);
-        enrollmentDateField.setAttribute('max', today);
-        enrollmentDateField.value = today; // Set default value to today
-    });
-
+        // Set enrollment date to today's date only
+        document.addEventListener('DOMContentLoaded', function () {
+            const enrollmentDateField = document.getElementById('enrollmentDate');
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Set both min and max to today's date
+            enrollmentDateField.setAttribute('min', today);
+            enrollmentDateField.setAttribute('max', today);
+            enrollmentDateField.value = today; // Set default value to today
+        });
     </script>
 </body>
 </html>

@@ -1,15 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page import="com.model.Student"%>
+<c:if test="${empty sessionScope.student}">
+    <c:redirect url="studentLogin.jsp" />
+</c:if>
+
 <%
-    // Retrieve the logged-in student object from the session
-    Student student = (Student) session.getAttribute("student");
-    if (student == null) {
-        // Redirect to login page if no user is logged in
-        response.sendRedirect("studentlogin.jsp");
+    if (session.getAttribute("student") == null) {
+        response.sendRedirect("studentLogin.jsp");
         return;
     }
+    
+    // Get the student object from the session
+    Student student = (Student) session.getAttribute("student");
 %>
+
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -345,9 +357,25 @@
                     text-align: center;
                 }
             }
+
+            /* Alert styling */
+            .alert {
+                border-radius: 8px;
+                box-shadow: var(--shadow-sm);
+            }
+            
+            .alert-success {
+                background-color: #d1e7dd;
+                border-color: #badbcc;
+            }
+            
+            .alert-danger {
+                background-color: #f8d7da;
+                border-color: #f5c2c7;
+            }
         </style>
     </head>
-    <body>
+<body>
         <div class="app-wrapper">
             <!-- Header -->
             <header class="app-header py-3">
@@ -368,9 +396,9 @@
                             <button class="btn profile-btn dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="d-flex align-items-center">
                                     <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                        ${sessionScope.student.name.charAt(0)}
+                                        <%= student.getName().charAt(0) %>
                                     </div>
-                                    <span class="ms-2 d-none d-md-inline">${sessionScope.student.name}</span>
+                                    <span class="ms-2 d-none d-md-inline"><%= student.getName() %></span>
                                 </div>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
@@ -388,6 +416,23 @@
             <!-- Main Content -->
             <main class="content-wrapper">
                 <div class="container">
+                    <!-- Display success or error messages if available -->
+                    <c:if test="${not empty successMessage}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${successMessage}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <% session.removeAttribute("successMessage"); %>
+                    </c:if>
+                    
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            ${errorMessage}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <% session.removeAttribute("errorMessage"); %>
+                    </c:if>
+                    
                     <div class="row g-4">
                         <!-- Sidebar -->
                         <div class="col-lg-3">
@@ -432,41 +477,49 @@
                                 </div>
                                 <div class="profile-body">
                                     <div class="profile-avatar">
-                                        ${sessionScope.student.name.charAt(0)}
+                                        <%= student.getName().charAt(0) %>
                                     </div>
 
-                                    <form action="UpdateProfileServlet" method="post">
-                                        <input type="hidden" name="id" value="${student.id}" />
+                                    <form action="UpdateProfileServlet" method="post" class="needs-validation" novalidate>
+                                        <input type="hidden" name="id" value="<%= student.getStudentID() %>" />
 
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" value="${student.name}" required>
+                                            <input type="text" class="form-control" id="name" name="name" value="<%= student.getName() %>" required>
+                                            <div class="invalid-feedback">
+                                                Please provide your full name.
+                                            </div>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="dob" class="form-label">Date of Birth</label>
-                                            <input type="date" class="form-control" id="dob" name="dob" value="${student.dob}" required>
+                                            <input type="date" class="form-control" id="dob" name="dob" 
+                                                value="<fmt:formatDate pattern="yyyy-MM-dd" value="${student.dateOfBirth}" />" required>
+                                            <div class="invalid-feedback">
+                                                Please provide your date of birth.
+                                            </div>
                                         </div>
-
-
 
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email Address</label>
-                                            <input type="email" class="form-control" id="email" name="email" value="${student.email}" required>
+                                            <input type="email" class="form-control" id="email" name="email" value="<%= student.getEmail() %>" readonly>
+                                            <small class="text-muted">Email address cannot be changed</small>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="phone" class="form-label">Phone Number</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="${student.phone}" required>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="<%= student.getPhone() != null ? student.getPhone() : "" %>" required>
+                                            <div class="invalid-feedback">
+                                                Please provide your phone number.
+                                            </div>
                                         </div>
 
-
-
+                                        <!-- Faculty Name (readonly) -->
                                         <div class="mb-3">
                                             <label for="facultyName" class="form-label">Faculty</label>
-                                            <input type="text" class="form-control" id="facultyName" name="facultyName" value="${student.facultyName}" required>
+                                            <input type="text" class="form-control" id="facultyName" name="facultyName" 
+                                                value="<%= student.getFacultyName() != null ? student.getFacultyName() : "" %>" readonly>
                                         </div>
-
 
                                         <div class="d-flex gap-2 mt-3">
                                             <button type="submit" class="btn btn-success">
@@ -477,8 +530,6 @@
                                                 <i class="fas fa-lock me-2"></i> Change Password
                                             </a>
                                         </div>
-
-
                                     </form>
                                 </div>
                             </div>
