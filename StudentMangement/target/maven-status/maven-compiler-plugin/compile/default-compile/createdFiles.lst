@@ -1,12 +1,17 @@
 com\controller\StudentRegistrationServlet.class
+com\model\Grade.class
 com\DAO\StudentDAO.class
 com\model\Student.class
 com\controller\ManageCoursesServlet.class
 com\DAO\AdminDAO.class
 com\controller\AdminLoginServlet.class
 com\model\Courses.class
+com\controller\ManageGradesServlet.class
 com\model\Admin.class
 com\DAO\CourseDAO.class
+com\controller\GradeViewServlet.class
 com\controller\AdminStudentView.class
+com\controller\LogoutServlet.class
 com\util\Database.class
 com\controller\CourseViewServlet.class
+com\DAO\GradeDAO.class
