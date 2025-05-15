@@ -40,7 +40,7 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>AdminStudentView</servlet-nam
+        <servlet-name>AdminStudentView</servlet-name>
         <url-pattern>/AdminStudentView</url-pattern>
     </servlet-mapping>
 

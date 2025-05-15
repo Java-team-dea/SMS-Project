@@ -298,7 +298,7 @@
                         <h4><i class="fas fa-calendar-check me-2"></i> Mark Attendance for Course</h4>
                     </div>
                     <div class="form-body">
-                        <form action="ManageAttendanceServlet" method="post">
+                        <form action="MarkAttendanceServlet" method="post">
                             <div class="mb-3">
                                 <label for="studentId" class="form-label">Student ID:</label>
                                 <input type="text" class="form-control" id="studentId" name="studentId" required>
