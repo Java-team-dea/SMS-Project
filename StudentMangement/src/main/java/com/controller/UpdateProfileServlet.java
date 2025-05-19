@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Handles student profile updates
+ * Updated to be compatible with the StudentDAO implementation
  */
 @WebServlet(name = "UpdateProfileServlet", urlPatterns = {"/UpdateProfileServlet"})
 public class UpdateProfileServlet extends HttpServlet {
@@ -44,6 +45,7 @@ public class UpdateProfileServlet extends HttpServlet {
         
         // Security check - only allow updates if user is logged in
         if (sessionStudent == null) {
+            LOGGER.log(Level.WARNING, "Update attempt without active session");
             response.sendRedirect("studentLogin.jsp");
             return;
         }
@@ -65,9 +67,10 @@ public class UpdateProfileServlet extends HttpServlet {
             }
             
             // Another security check - ensure the student can only update their own profile
-            if (studentId != sessionStudent.getStudentID()) {
+            // Using getId() instead of getStudentID() to match DAO implementation
+            if (studentId != sessionStudent.getId()) {
                 LOGGER.log(Level.WARNING, "Attempt to update different student ID. Session ID: {0}, Requested ID: {1}", 
-                        new Object[]{sessionStudent.getStudentID(), studentId});
+                        new Object[]{sessionStudent.getId(), studentId});
                 session.setAttribute("errorMessage", "Unauthorized operation");
                 response.sendRedirect("profile.jsp");
                 return;
@@ -101,26 +104,32 @@ public class UpdateProfileServlet extends HttpServlet {
             }
             
             // Create a student object with the updated information
+            // Using the property names from the DAO implementation
             Student updatedStudent = new Student();
-            updatedStudent.setStudentID(studentId);
+            updatedStudent.setId(studentId); // Using setId() instead of setStudentID()
             updatedStudent.setName(name);
-            updatedStudent.setDateOfBirth(dob);
+            updatedStudent.setDob(dob); // Using setDob() instead of setDateOfBirth()
             updatedStudent.setPhone(phone);
+            
+            // For logging purposes
+            LOGGER.log(Level.INFO, "Attempting to update profile for student ID: {0}", studentId);
             
             // Update the student profile in the database
             StudentDAO studentDAO = new StudentDAO();
             boolean updateSuccess = studentDAO.updateProfile(updatedStudent);
             
             if (updateSuccess) {
-                // Update session data with new values
+                // Update session data with new values - using correct getter/setter names
                 sessionStudent.setName(name);
-                sessionStudent.setDateOfBirth(dob);
+                sessionStudent.setDob(dob); // Using setDob() instead of setDateOfBirth()
                 sessionStudent.setPhone(phone);
                 
                 session.setAttribute("student", sessionStudent);
                 session.setAttribute("successMessage", "Profile updated successfully");
+                LOGGER.log(Level.INFO, "Profile successfully updated for student ID: {0}", studentId);
             } else {
                 session.setAttribute("errorMessage", "Failed to update profile");
+                LOGGER.log(Level.WARNING, "Failed to update profile for student ID: {0}", studentId);
             }
             
             response.sendRedirect("profile.jsp");

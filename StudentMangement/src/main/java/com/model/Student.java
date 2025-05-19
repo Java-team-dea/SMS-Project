@@ -12,9 +12,9 @@ import java.util.Date;
  */
 public class Student {
     // Core database properties
-    private int studentID;
+    private int id;  // Changed from studentID to id to match DB
     private String name;
-    private Date dateOfBirth;
+    private Date dob;  // Changed from dateOfBirth to dob to match DB
     private String gender;
     private String nic;
     private String email;
@@ -42,10 +42,10 @@ public class Student {
     }
 
     // Parameterized constructor
-    public Student(String name, Date dateOfBirth, String gender, String nic, String email, String phone,
+    public Student(String name, Date dob, String gender, String nic, String email, String phone,
                   String address, Date enrollmentDate, int facultyID, int departmentID, int courseID, String password) {
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
+        this.dob = dob;
         this.gender = gender;
         this.nic = nic;
         this.email = email;
@@ -59,12 +59,12 @@ public class Student {
     }
 
     // Getters and Setters for core properties
-    public int getStudentID() {
-        return studentID;
+    public int getId() {
+        return id;
     }
 
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -75,12 +75,12 @@ public class Student {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public String getGender() {
@@ -224,7 +224,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "studentID=" + studentID +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", enrollmentDate=" + enrollmentDate +
@@ -239,8 +239,25 @@ public class Student {
                 ", outstandingFees='" + outstandingFees + '\'' +
                 '}';
     }
-
-    public void setId(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    // For backward compatibility
+    public int getStudentID() {
+        return id;
     }
+
+    public void setStudentID(int studentID) {
+        this.id = studentID;
+    }
+    
+    public Date getDateOfBirth() {
+        return dob;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dob = dateOfBirth;
+    }
+ 
+public boolean hasCourse() {
+    return this.courseID > 0;
+}
 }

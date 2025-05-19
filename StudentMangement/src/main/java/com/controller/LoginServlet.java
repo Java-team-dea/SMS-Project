@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
             
             if (student != null) {
                 // Login successful
-                LOGGER.log(Level.INFO, "Login successful for student ID: {0}", student.getStudentID());
+                LOGGER.log(Level.INFO, "Login successful for student ID: {0}", student.getId());
                 
                 // Store the student object in the session with the key "student"
                 session.setAttribute("student", student);

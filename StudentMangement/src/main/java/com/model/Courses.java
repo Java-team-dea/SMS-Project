@@ -5,103 +5,98 @@
 package com.model;
 
 /**
- *
- * @author dilshan
+ * Model class representing a Course in the system
  */
 public class Courses {
-    
-    private String Name;
-    private String Description;
-    private int Credits;
-    private int CourseID;
-    private int Duration;
+    private String name;
+    private String description;
+    private int credits;
+    private int courseID;
+    private int duration;
     private int departmentID;
-;
+    private String departmentName;  // New field for department name
 
-    /**
-     * @return the Name
-     */
+    // Default constructor
+    public Courses() {
+    }
+
+    // Parameterized constructor
+    public Courses(String name, String description, int credits, int duration, 
+                  int departmentID, String departmentName) {
+        this.name = name;
+        this.description = description;
+        this.credits = credits;
+        this.duration = duration;
+        this.departmentID = departmentID;
+        this.departmentName = departmentName;
+    }
+
+    // Getters and Setters
+
     public String getName() {
-        return Name;
+        return name;
     }
 
-    /**
-     * @param Name the Name to set
-     */
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * @return the Description
-     */
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    /**
-     * @param Description the Description to set
-     */
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    /**
-     * @return the Credits
-     */
     public int getCredits() {
-        return Credits;
+        return credits;
     }
 
-    /**
-     * @param Credits the Credits to set
-     */
-    public void setCredits(int Credits) {
-        this.Credits = Credits;
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
-    /**
-     * @return the Duration
-     */
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
     public int getDuration() {
-        return Duration;
+        return duration;
     }
 
-    /**
-     * @param Duration the Duration to set
-     */
-    public void setDuration(int Duration) {
-        this.Duration = Duration;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    /**
-     * @return the departmentID
-     */
     public int getDepartmentID() {
         return departmentID;
     }
 
-    /**
-     * @param departmentID the departmentID to set
-     */
     public void setDepartmentID(int departmentID) {
         this.departmentID = departmentID;
     }
 
-    /**
-     * @return the CourseID
-     */
-    public int getCourseID() {
-        return CourseID;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    /**
-     * @param CourseID the CourseID to set
-     */
-    public void setCourseID(int CourseID) {
-        this.CourseID = CourseID;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Courses{" +
+                "name='" + name + '\'' +
+                ", courseID=" + courseID +
+                ", departmentID=" + departmentID +
+                ", departmentName='" + departmentName + '\'' +
+                '}';
+    }
 }
+

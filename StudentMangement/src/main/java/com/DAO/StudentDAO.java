@@ -10,11 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Data Access Object for Student entity with improved error handling and logging
+ * Updated to match the database schema
  */
 public class StudentDAO {
     private static final Logger LOGGER = Logger.getLogger(StudentDAO.class.getName());
@@ -45,13 +47,13 @@ public class StudentDAO {
                 return null;
             }
             
-            // Using a JOIN to get faculty name along with student data
+            // Using a JOIN to get faculty name along with student data - table name changed to lowercase
             String sql = "SELECT s.*, f.Name AS FacultyName, d.Name AS DepartmentName, c.Name AS CourseName " +
-                        "FROM Student s " +
+                        "FROM student s " +
                         "LEFT JOIN Faculty f ON s.FacultyID = f.FacultyID " +
-                        "LEFT JOIN Department d ON s.DepartmentID = d.DepartmentID " +
+                        "LEFT JOIN Department d ON s.departmentID = d.DepartmentID " +
                         "LEFT JOIN Courses c ON s.CourseID = c.CourseID " +
-                        "WHERE s.Email = ? AND s.Password = ?";
+                        "WHERE s.email = ? AND s.password = ?";
             
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
@@ -63,21 +65,21 @@ public class StudentDAO {
                 // If student found, create a Student object with basic details
                 student = new Student();
                 
-                // Set core student properties
-                student.setStudentID(rs.getInt("StudentID"));
-                student.setName(rs.getString("Name"));
-                student.setEmail(rs.getString("Email"));
+                // Set core student properties - using the column name "id" instead of "StudentID"
+                student.setId(rs.getInt("id"));
+                student.setName(rs.getString("name"));
+                student.setEmail(rs.getString("email"));
                 
                 try {
-                    // These fields might be missing or named differently in some schemas
-                    student.setDateOfBirth(rs.getDate("DateOfBirth"));
-                    student.setGender(rs.getString("Gender"));
-                    student.setNic(rs.getString("NIC"));
-                    student.setPhone(rs.getString("Phone"));
-                    student.setAddress(rs.getString("Address"));
-                    student.setEnrollmentDate(rs.getDate("EnrollmentDate"));
+                    // These fields match the database column names
+                    student.setDob(rs.getDate("dob"));
+                    student.setGender(rs.getString("gender"));
+                    student.setNic(rs.getString("nic"));
+                    student.setPhone(rs.getString("phone"));
+                    student.setAddress(rs.getString("address"));
+                    student.setEnrollmentDate(rs.getDate("enrollmentDate"));
                     student.setFacultyID(rs.getInt("FacultyID"));
-                    student.setDepartmentID(rs.getInt("DepartmentID"));
+                    student.setDepartmentID(rs.getInt("departmentID"));
                     student.setCourseID(rs.getInt("CourseID"));
                     student.setRegistrationDate(rs.getDate("RegistrationDate"));
                     
@@ -91,7 +93,6 @@ public class StudentDAO {
                 }
                 
                 // Now that we have the student ID, get additional dashboard information separately
-                // This approach is more resilient than using subqueries in the original query
                 setDashboardInfo(student, conn);
             } else {
                 LOGGER.log(Level.INFO, "Authentication failed for email: {0}", email);
@@ -120,11 +121,11 @@ public class StudentDAO {
         ResultSet rs = null;
         
         try {
-            // Get course count
+            // Get course count - using student_id to match database column
             try {
                 String coursesCountSql = "SELECT COUNT(*) AS courses_count FROM student_courses WHERE student_id = ?";
                 stmt = conn.prepareStatement(coursesCountSql);
-                stmt.setInt(1, student.getStudentID());
+                stmt.setInt(1, student.getId());
                 rs = stmt.executeQuery();
                 
                 if (rs.next()) {
@@ -143,7 +144,7 @@ public class StudentDAO {
             try {
                 String gpaSql = "SELECT AVG(grade_point) AS gpa FROM student_grades WHERE student_id = ?";
                 stmt = conn.prepareStatement(gpaSql);
-                stmt.setInt(1, student.getStudentID());
+                stmt.setInt(1, student.getId());
                 rs = stmt.executeQuery();
                 
                 if (rs.next()) {
@@ -162,7 +163,7 @@ public class StudentDAO {
             try {
                 String feesSql = "SELECT SUM(amount) AS outstanding_fees FROM student_fees WHERE student_id = ? AND payment_status = 'unpaid'";
                 stmt = conn.prepareStatement(feesSql);
-                stmt.setInt(1, student.getStudentID());
+                stmt.setInt(1, student.getId());
                 rs = stmt.executeQuery();
                 
                 if (rs.next()) {
@@ -209,12 +210,13 @@ public class StudentDAO {
                 return null;
             }
             
+            // Updated table names and column names
             String sql = "SELECT s.*, f.Name AS FacultyName, d.Name AS DepartmentName, c.Name AS CourseName " +
-                        "FROM Student s " +
+                        "FROM student s " +
                         "LEFT JOIN Faculty f ON s.FacultyID = f.FacultyID " +
-                        "LEFT JOIN Department d ON s.DepartmentID = d.DepartmentID " +
+                        "LEFT JOIN Department d ON s.departmentID = d.DepartmentID " +
                         "LEFT JOIN Courses c ON s.CourseID = c.CourseID " +
-                        "WHERE s.StudentID = ?";
+                        "WHERE s.id = ?";
             
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, studentID);
@@ -224,20 +226,20 @@ public class StudentDAO {
             if (rs.next()) {
                 student = new Student();
                 
-                // Set core student properties
-                student.setStudentID(rs.getInt("StudentID"));
-                student.setName(rs.getString("Name"));
-                student.setEmail(rs.getString("Email"));
+                // Set core student properties using the database column names
+                student.setId(rs.getInt("id"));
+                student.setName(rs.getString("name"));
+                student.setEmail(rs.getString("email"));
                 
                 try {
-                    student.setDateOfBirth(rs.getDate("DateOfBirth"));
-                    student.setGender(rs.getString("Gender"));
-                    student.setNic(rs.getString("NIC"));
-                    student.setPhone(rs.getString("Phone"));
-                    student.setAddress(rs.getString("Address"));
-                    student.setEnrollmentDate(rs.getDate("EnrollmentDate"));
+                    student.setDob(rs.getDate("dob"));
+                    student.setGender(rs.getString("gender"));
+                    student.setNic(rs.getString("nic"));
+                    student.setPhone(rs.getString("phone"));
+                    student.setAddress(rs.getString("address"));
+                    student.setEnrollmentDate(rs.getDate("enrollmentDate"));
                     student.setFacultyID(rs.getInt("FacultyID"));
-                    student.setDepartmentID(rs.getInt("DepartmentID"));
+                    student.setDepartmentID(rs.getInt("departmentID"));
                     student.setCourseID(rs.getInt("CourseID"));
                     student.setRegistrationDate(rs.getDate("RegistrationDate"));
                     
@@ -279,13 +281,14 @@ public class StudentDAO {
                 return false;
             }
             
-            String sql = "UPDATE Student SET Name = ?, DateOfBirth = ?, Phone = ? WHERE StudentID = ?";
+            // Updated table name and column names
+            String sql = "UPDATE student SET name = ?, dob = ?, phone = ? WHERE id = ?";
             
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, student.getName());
-            stmt.setDate(2, new java.sql.Date(student.getDateOfBirth().getTime()));
+            stmt.setDate(2, new java.sql.Date(student.getDob().getTime()));
             stmt.setString(3, student.getPhone());
-            stmt.setInt(4, student.getStudentID());
+            stmt.setInt(4, student.getId());
             
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -321,7 +324,12 @@ public class StudentDAO {
         }
     }
     
-    // Stub methods - to be implemented as needed
+    /**
+     * Checks if an email already exists in the database
+     * 
+     * @param email The email to check
+     * @return true if email exists, false otherwise
+     */
     public boolean isEmailExists(String email) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -329,7 +337,8 @@ public class StudentDAO {
         
         try {
             conn = Database.getConnection();
-            String sql = "SELECT COUNT(*) FROM Student WHERE Email = ?";
+            // Updated table name and column name
+            String sql = "SELECT COUNT(*) FROM student WHERE email = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
             rs = stmt.executeQuery();
@@ -346,6 +355,12 @@ public class StudentDAO {
         return false;
     }
 
+    /**
+     * Checks if a NIC already exists in the database
+     * 
+     * @param nic The NIC to check
+     * @return true if NIC exists, false otherwise
+     */
     public boolean isNicExists(String nic) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -353,7 +368,8 @@ public class StudentDAO {
         
         try {
             conn = Database.getConnection();
-            String sql = "SELECT COUNT(*) FROM Student WHERE NIC = ?";
+            // Updated table name and column name
+            String sql = "SELECT COUNT(*) FROM student WHERE nic = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, nic);
             rs = stmt.executeQuery();
@@ -370,19 +386,26 @@ public class StudentDAO {
         return false;
     }
 
+    /**
+     * Adds a new student to the database
+     * 
+     * @param student The Student object to add
+     * @return true if student added successfully, false otherwise
+     */
     public boolean addStudent(Student student) {
         Connection conn = null;
         PreparedStatement stmt = null;
         
         try {
             conn = Database.getConnection();
-            String sql = "INSERT INTO Student (Name, DateOfBirth, Gender, NIC, Email, Phone, Address, " +
-                         "EnrollmentDate, FacultyID, DepartmentID, CourseID, Password) " +
+            // Updated column names to match database schema
+            String sql = "INSERT INTO student (name, dob, gender, nic, email, phone, address, " +
+                         "enrollmentDate, FacultyID, departmentID, CourseID, password) " +
                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, student.getName());
-            stmt.setDate(2, new java.sql.Date(student.getDateOfBirth().getTime()));
+            stmt.setDate(2, new java.sql.Date(student.getDob().getTime()));
             stmt.setString(3, student.getGender());
             stmt.setString(4, student.getNic());
             stmt.setString(5, student.getEmail());
@@ -406,7 +429,58 @@ public class StudentDAO {
         return false;
     }
 
+    /**
+     * Updates a student's profile with all available fields
+     * 
+     * @param student The Student object with updated information
+     * @return true if update successful, false otherwise
+     */
     public boolean updateStudentProfile(Student student) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = Database.getConnection();
+            if (conn == null) {
+                LOGGER.severe("Failed to obtain database connection");
+                return false;
+            }
+            
+            // Updated table name and column names
+            String sql = "UPDATE student SET name = ?, dob = ?, gender = ?, " +
+                         "nic = ?, email = ?, phone = ?, address = ?, " +
+                         "FacultyID = ?, departmentID = ?, CourseID = ? " +
+                         "WHERE id = ?";
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, student.getName());
+            stmt.setDate(2, new java.sql.Date(student.getDob().getTime()));
+            stmt.setString(3, student.getGender());
+            stmt.setString(4, student.getNic());
+            stmt.setString(5, student.getEmail());
+            stmt.setString(6, student.getPhone());
+            stmt.setString(7, student.getAddress());
+            stmt.setInt(8, student.getFacultyID());
+            stmt.setInt(9, student.getDepartmentID());
+            stmt.setInt(10, student.getCourseID());
+            stmt.setInt(11, student.getId());
+            
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+            
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error updating student profile", e);
+            return false;
+        } finally {
+            closeResources(null, stmt, conn);
+        }
+    }
+
+    public boolean updateStudent(Student student) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public ArrayList<Student> getAllStudents() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

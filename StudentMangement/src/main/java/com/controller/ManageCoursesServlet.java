@@ -51,12 +51,21 @@ public class ManageCoursesServlet extends HttpServlet {
         try {
             coursedao.addCourses(course);
             
+             request.setAttribute("successMessage", "Course added successfully!");
+        
+            
+            
              RequestDispatcher dispacher=request.getRequestDispatcher("courseList.jsp");
          dispacher.forward(request, response);
             
             
         } catch (Exception ex) {
-            ex.printStackTrace();
+           
+            
+            
+             request.setAttribute("errorMessage", "Error adding course: " + ex.getMessage());
+        RequestDispatcher dispacher = request.getRequestDispatcher("courseList.jsp");
+        dispacher.forward(request, response);
         }
         
     }
