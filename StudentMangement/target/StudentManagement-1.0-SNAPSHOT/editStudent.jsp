@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -246,32 +247,106 @@
                                 <h2><i class="fas fa-user-edit me-2"></i>Edit Student Details</h2>
                             </div>
                             <div class="form-body">
-                                <form action="ManageStudentsServlet" method="post">
-                                    <input type="hidden" name="id" value="${student.id}">
+                                <!-- Error Message -->
+                                <c:if test="${not empty param.error}">
+                                    <div class="alert alert-danger">${param.error}</div>
+                                </c:if>
+                                
+                                <form action="${pageContext.request.contextPath}/UpdateStudentServlet1" method="post">
+    <input type="hidden" name="id" value="${student.id}">
                                     
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="${student.name}" required>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="name" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" 
+                                                   value="${student.name}" required>
+                                        </div>
+                                        
+                                       <div class="col-md-6 mb-3">
+    <label for="dob" class="form-label">Date of Birth</label>
+    <input type="date" class="form-control" id="dob" name="dob" 
+           value="<fmt:formatDate value='${student.dob}' pattern='yyyy-MM-dd'/>" required>
+</div>
                                     </div>
                                     
-                                    <div class="mb-3">
-                                        <label for="course" class="form-label">Course</label>
-                                        <input type="text" class="form-control" id="course" name="course" value="${student.course}" required>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender" 
+                                                           id="male" value="Male" ${student.gender eq 'Male' ? 'checked' : ''}>
+                                                    <label class="form-check-label" for="male">Male</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender" 
+                                                           id="female" value="Female" ${student.gender eq 'Female' ? 'checked' : ''}>
+                                                    <label class="form-check-label" for="female">Female</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender" 
+                                                           id="other" value="Other" ${student.gender eq 'Other' ? 'checked' : ''}>
+                                                    <label class="form-check-label" for="other">Other</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nic" class="form-label">NIC</label>
+                                            <input type="text" class="form-control" id="nic" name="nic" 
+                                                   value="${student.nic}" required>
+                                        </div>
                                     </div>
                                     
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="${student.email}" required>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" 
+                                                   value="${student.email}" required>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <input type="text" class="form-control" id="phone" name="phone" 
+                                                   value="${student.phone}" required>
+                                        </div>
                                     </div>
                                     
-                                    <div class="mb-3">
-                                        <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="phone" name="phone" value="${student.phone}" required>
+                                    <div class="mb-4">
+                                        <label for="address" class="form-label">Address</label>
+                                        <textarea class="form-control" id="address" name="address" rows="3" required>${student.address}</textarea>
                                     </div>
+                                    
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="facultyID" class="form-label">Faculty</label>
+                                            <input type="text" class="form-control" id="facultyID" name="facultyID" 
+                                                   value="${student.facultyID}" required>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="departmentID" class="form-label">Department ID</label>
+                                            <input type="number" class="form-control" id="departmentID" name="departmentID" 
+                                                   value="${student.departmentID}" required>
+                                        </div>
+                                        
+                                           <div class="col-md-6 mb-3">
+                                            <label for="courseID" class="form-label">Course ID</label>
+                                            <input type="number" class="form-control" id="courseID" name="courseID" 
+                                                   value="${student.courseID}" required>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                        <div class="col-md-6 mb-3">
+    <label for="enrollmentDate" class="form-label">Enrollment Date</label>
+    <input type="date" class="form-control" id="enrollmentDate" name="enrollmentDate" 
+           value="<fmt:formatDate value='${student.enrollmentDate}' pattern='yyyy-MM-dd'/>" required>
+</div>
                                     
                                     <div class="d-flex mt-4">
-                                        <a href="studentList.jsp" class="btn btn-secondary me-2">
-                                            <i class="fas fa-arrow-left me-1"></i> Back to List
+                                        <a href="StudentListServlet" class="btn btn-secondary me-2">
+                                            <i class="fas fa-times me-1"></i> Cancel
                                         </a>
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fas fa-save me-1"></i> Update Student
@@ -298,5 +373,21 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        (function() {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
 </body>
 </html>

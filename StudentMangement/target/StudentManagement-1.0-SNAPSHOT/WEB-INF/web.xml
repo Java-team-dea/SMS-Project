@@ -24,6 +24,58 @@
         <servlet-name>ManageCoursesServlet</servlet-name>
         <servlet-class>com.controller.ManageCoursesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CourseViewServlet</servlet-name>
+        <servlet-class>com.controller.CourseViewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageGradesServlet</servlet-name>
+        <servlet-class>com.controller.ManageGradesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GradeViewServlet</servlet-name>
+        <servlet-class>com.controller.GradeViewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFeeServlet</servlet-name>
+        <servlet-class>com.controller.AddFeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceListServlet</servlet-name>
+        <servlet-class>com.controller.AttendanceListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MarkAttendanceServlet</servlet-name>
+        <servlet-class>com.controller.MarkAttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeeListServlet</servlet-name>
+        <servlet-class>com.controller.FeeListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCourseServlet1</servlet-name>
+        <servlet-class>com.controller.EditCourseServlet1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCourseServlet2</servlet-name>
+        <servlet-class>com.controller.EditStudentServlet2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <servlet-class>com.controller.UpdateStudentServlet1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCourseServlet</servlet-name>
+        <servlet-class>com.controller.UpdateCourseServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentListServlet</servlet-name>
+        <servlet-class>StudentListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <servlet-class>com.controller.AttendanceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentLoginServlet</servlet-name>
         <url-pattern>/StudentLoginServlet</url-pattern>
@@ -47,6 +99,58 @@
     <servlet-mapping>
         <servlet-name>ManageCoursesServlet</servlet-name>
         <url-pattern>/ManageCoursesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseViewServlet</servlet-name>
+        <url-pattern>/CourseViewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageGradesServlet</servlet-name>
+        <url-pattern>/ManageGradesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradeViewServlet</servlet-name>
+        <url-pattern>/GradeViewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFeeServlet</servlet-name>
+        <url-pattern>/AddFeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceListServlet</servlet-name>
+        <url-pattern>/AttendanceListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarkAttendanceServlet</servlet-name>
+        <url-pattern>/MarkAttendanceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeeListServlet</servlet-name>
+        <url-pattern>/FeeListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCourseServlet1</servlet-name>
+        <url-pattern>/EditCourseServlet1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCourseServlet2</servlet-name>
+        <url-pattern>/EditCourseServlet2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <url-pattern>/UpdateStudentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCourseServlet</servlet-name>
+        <url-pattern>/UpdateCourseServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentListServlet</servlet-name>
+        <url-pattern>/StudentListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <url-pattern>//AttendanceServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

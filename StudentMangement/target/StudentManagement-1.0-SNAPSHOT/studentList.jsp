@@ -290,7 +290,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="index.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
@@ -322,7 +322,7 @@
                 <div class="main-card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4><i class="fas fa-users me-2"></i> Manage Students</h4>
-                        <a href="addStudent.jsp" class="btn btn-primary">
+                        <a href="studentRegistration.jsp" class="btn btn-primary">
                             <i class="fas fa-plus me-2"></i> Add New Student
                         </a>
                     </div>
@@ -330,12 +330,24 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
-                                    <tr>
+<!--                                    <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col" class="text-center">Actions</th>
-                                    </tr>
+                                    </tr>-->
+
+ <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Faculty</th>
+                                <th scope="col">Enrollment Date</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+
                                 </thead>
                                 <tbody>
                                     
@@ -345,14 +357,24 @@
                                     
                                     <c:forEach var="student" items="${studentList}">
                                         <tr>
-
+                                            
+                                            <td>${student.id}</td>
                                             <td>${student.name}</td>
                                             <td>${student.email}</td>
                                              <td>${student.phone}</td>
+                                             
+                                                  
+                                    
+                                    <td>${student.facultyID}</td>
+                                    <td>${student.enrollmentDate}</td>
+                                             
+                                             
+                                             
                                             <td class="text-center">
-                                                <a href="editStudent.jsp?id=${student.id}" class="btn btn-outline-primary btn-sm action-btn me-2">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
+                                              <a href="${pageContext.request.contextPath}/EditStudentServlet2?id=${student.id}" 
+                                                  class="btn btn-outline-primary btn-sm action-btn me-2">
+                                                   <i class="fas fa-edit"></i> Edit
+                                               </a>
                                                 <a href="deleteStudent?id=${student.id}" 
                                                    onclick="return confirm('Are you sure you want to delete this student?')" 
                                                    class="btn btn-danger btn-sm action-btn">

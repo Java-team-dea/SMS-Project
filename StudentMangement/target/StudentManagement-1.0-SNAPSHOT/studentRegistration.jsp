@@ -1,3 +1,15 @@
+<%
+    // Prevent browser caching
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+
+    // Check if student is logged in
+    if (session.getAttribute("student") == null) {
+        response.sendRedirect("studentLogin.jsp");
+        return;
+    }
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -190,7 +202,7 @@
                     <!-- Personal Information Section -->
                     <div class="mb-4">
                         <h5 class="text-success mb-3"><i class="fas fa-user me-2"></i>Personal Information</h5>
-                        
+
                         <!-- Name Field -->
                         <div class="form-floating mb-3 position-relative">
                             <input type="text" class="form-control" id="name" name="Name" placeholder="Full Name" required>

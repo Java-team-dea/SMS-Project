@@ -183,8 +183,8 @@
             color: #ef4444;
         }
 
-        /* Dashboard Cards */
-        .dashboard-card {
+        /* Content Card */
+        .content-card {
             background-color: rgba(255, 255, 255, 0.98);
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -193,13 +193,16 @@
             margin-bottom: 2rem;
         }
 
-        .dashboard-header {
+        .content-header {
             padding: 1.25rem 1.5rem;
             border-bottom: 1px solid var(--gray-200);
             position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .dashboard-header:after {
+        .content-header:after {
             content: '';
             position: absolute;
             bottom: -1px;
@@ -209,82 +212,14 @@
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
-        .dashboard-header h4 {
+        .content-header h4 {
             font-weight: 600;
             font-size: 1.25rem;
             margin-bottom: 0;
         }
 
-        .dashboard-body {
+        .content-body {
             padding: 1.5rem;
-        }
-
-        /* Grades Table */
-        .grades-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .grades-table th {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border: none;
-        }
-
-        .grades-table td {
-            padding: 1rem;
-            border-top: 1px solid var(--gray-200);
-            background-color: white;
-        }
-
-        .grades-table tr:hover td {
-            background-color: var(--accent-color);
-        }
-
-        .grade-badge {
-            padding: 0.35rem 0.65rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: inline-block;
-            text-align: center;
-            min-width: 60px;
-        }
-
-        .grade-a {
-            background-color: #d1fae5;
-            color: #047857;
-        }
-
-        .grade-b {
-            background-color: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .grade-c {
-            background-color: #fef3c7;
-            color: #b45309;
-        }
-
-        .grade-d {
-            background-color: #ffedd5;
-            color: #c2410c;
-        }
-
-        .grade-f {
-            background-color: #fee2e2;
-            color: #b91c1c;
-        }
-
-        .gpa-value {
-            font-weight: 600;
         }
 
         /* Summary Card */
@@ -343,6 +278,121 @@
             opacity: 0.9;
         }
 
+        /* Table Styles */
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+
+        .data-table thead th {
+            background-color: rgba(0, 146, 69, 0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-color);
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: var(--accent-color);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        /* Grade Badges */
+        .grade-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-block;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .grade-a {
+            background-color: rgba(0, 200, 83, 0.1);
+            color: #00c853;
+        }
+
+        .grade-b {
+            background-color: rgba(0, 176, 255, 0.1);
+            color: #00b0ff;
+        }
+
+        .grade-c {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: #ffab00;
+        }
+
+        .grade-d {
+            background-color: rgba(255, 109, 0, 0.1);
+            color: #ff6d00;
+        }
+
+        .grade-f {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--gray-300);
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-description {
+            color: var(--gray-600);
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .btn-download {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 146, 69, 0.3);
+        }
+
         /* Footer */
         .app-footer {
             background-color: rgba(33, 37, 41, 0.95);
@@ -393,10 +443,6 @@
             .content-wrapper {
                 padding: 1.5rem 0;
             }
-            
-            .dashboard-card {
-                padding: 1.5rem;
-            }
         }
 
         @media (max-width: 768px) {
@@ -417,6 +463,11 @@
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
+            }
+
+            .btn-download {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -476,7 +527,7 @@
                                 <a href="myCourses.jsp" class="nav-link">
                                     <i class="fas fa-book"></i> My Courses
                                 </a>
-                                <a href="myAttendance.jsp" class="nav-link">
+                                <a href="AttendanceServlet" class="nav-link">
                                     <i class="fas fa-calendar-check"></i> Attendance
                                 </a>
                                 <a href="myGrades.jsp" class="nav-link active">
@@ -498,9 +549,9 @@
                         </div>
                     </div>
                     
-                    <!-- Main Grades Area -->
+                    <!-- Main Content Area -->
                     <div class="col-lg-9">
-                        <!-- GPA Summary Section -->
+                        <!-- Academic Summary -->
                         <div class="summary-card">
                             <h2 class="summary-title"><i class="fas fa-chart-line me-2"></i> Academic Performance</h2>
                             <div class="summary-stats">
@@ -519,22 +570,31 @@
                             </div>
                         </div>
                         
-                        <!-- Grades Table Section -->
-                        <div class="dashboard-card">
-                            <div class="dashboard-header d-flex justify-content-between align-items-center">
+                        <!-- Grades Table -->
+                        <div class="content-card">
+                            <div class="content-header">
                                 <h4><i class="fas fa-graduation-cap me-2"></i> Course Grades</h4>
-                                <button class="btn btn-sm btn-primary"><i class="fas fa-download me-1"></i> Download Report</button>
+                                <button class="btn btn-download">
+                                    <i class="fas fa-download me-1"></i> Download Report
+                                </button>
                             </div>
-                            <div class="dashboard-body">
+                            <div class="content-body">
                                 <c:choose>
                                     <c:when test="${empty gradeList}">
-                                        <div class="alert alert-info">
-                                            <i class="fas fa-info-circle me-2"></i> No grades available at the moment.
+                                        <div class="empty-state">
+                                            <div class="empty-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <h5 class="empty-title">No Grades Available Yet</h5>
+                                            <p class="empty-description">
+                                                Your grades will appear here once your instructors have submitted them.
+                                                Check back later or contact your program coordinator if you believe this is an error.
+                                            </p>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
                                         <div class="table-responsive">
-                                            <table class="grades-table">
+                                            <table class="table data-table">
                                                 <thead>
                                                     <tr>
                                                         <th>Course Code</th>
@@ -569,7 +629,7 @@
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </td>
-                                                            <td><span class="gpa-value">${grade.gpa}</span></td>
+                                                            <td>${grade.gpa}</td>
                                                             <td>${grade.credits}</td>
                                                             <td>
                                                                 <c:choose>
@@ -591,12 +651,12 @@
                             </div>
                         </div>
                         
-                        <!-- GPA Calculation Info -->
-                        <div class="dashboard-card">
-                            <div class="dashboard-header">
+                        <!-- GPA Information -->
+                        <div class="content-card">
+                            <div class="content-header">
                                 <h4><i class="fas fa-info-circle me-2"></i> GPA Information</h4>
                             </div>
-                            <div class="dashboard-body">
+                            <div class="content-body">
                                 <div class="row g-4">
                                     <div class="col-md-6">
                                         <h5 class="mb-3">Grading Scale</h5>
@@ -731,3 +791,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

@@ -80,6 +80,16 @@
             color: var(--gray-600);
             margin-bottom: 0;
         }
+     .student-badge {
+            background-color: #FF5722;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: white;
+            margin-left: 0.5rem;
+            letter-spacing: 0.5px;
+        }
 
         /* Content Area */
         .content-wrapper {
@@ -249,17 +259,37 @@
         <header class="app-header py-3">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="index.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                    <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
-                            <p class="university-system">Student Management System</p>
+                            <div class="d-flex align-items-center">
+                                <p class="university-system">Student Management System</p>
+                                <span class="admin-badge">ADMIN PORTAL</span>
+                            </div>
                         </div>
                     </a>
+                    
+                    <div class="dropdown">
+                        <button class="btn profile-btn dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                    A
+                                </div>
+                                <span class="ms-2 d-none d-md-inline">Admin</span>
+                            </div>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item" href="adminProfile.jsp"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2 text-primary"></i> Notifications</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2 text-primary"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="LogoutServlet"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </header>
-
         <!-- Main Content -->
         <main class="content-wrapper">
             <div class="container">
@@ -268,20 +298,20 @@
                         <h4><i class="fas fa-calendar-check me-2"></i> Mark Attendance for Course</h4>
                     </div>
                     <div class="form-body">
-                        <form action="ManageAttendanceServlet" method="post">
+                        <form action="MarkAttendanceServlet" method="post">
                             <div class="mb-3">
                                 <label for="studentId" class="form-label">Student ID:</label>
                                 <input type="text" class="form-control" id="studentId" name="studentId" required>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="courseId" class="form-label">Course ID:</label>
-                                <input type="text" class="form-control" id="courseId" name="courseId" required>
+                                <label for="moduleid" class="form-label">Module Code:</label>
+                                <input type="text" class="form-control" id="moduleid" name="moduleid" required>
                             </div>
                             
                             <div class="mb-4">
-                                <label for="attendanceStatus" class="form-label">Attendance Status:</label>
-                                <select class="form-select" id="attendanceStatus" name="attendanceStatus">
+                                <label for="status" class="form-label">Attendance Status:</label>
+                                <select class="form-select" id="status" name="status">
                                     <option value="Present">Present</option>
                                     <option value="Absent">Absent</option>
                                     <option value="Late">Late</option>

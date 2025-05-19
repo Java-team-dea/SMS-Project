@@ -1,3 +1,15 @@
+<%
+    // Prevent browser caching
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+
+    // Check if student is logged in
+    if (session.getAttribute("student") == null) {
+        response.sendRedirect("studentLogin.jsp");
+        return;
+    }
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -458,7 +470,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="index.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
@@ -503,7 +515,7 @@
                                 <a href="studentDashboard.jsp" class="nav-link">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
-                                <a href="myCourses.jsp" class="nav-link">
+                                <a href="MyCoursesServlet" class="nav-link">
                                     <i class="fas fa-book"></i> My Courses
                                 </a>
                                 <a href="AttendanceServlet" class="nav-link active">
@@ -528,9 +540,8 @@
                         </div>
                     </div>
                     
-                    <!-- Main Content Area -->
+                     <!-- Main Content Area -->
                     <div class="col-lg-9">
-                        <!-- Page Title -->
                         <div class="dashboard-card">
                             <div class="dashboard-header">
                                 <h4><i class="fas fa-calendar-check me-2"></i> My Attendance</h4>
@@ -542,29 +553,29 @@
                                         <div class="stat-icon icon-total">
                                             <i class="fas fa-calendar"></i>
                                         </div>
-                                        <div class="stat-value">${totalClasses}</div>
-                                        <div class="stat-label">Total Classes</div>
+                                        <div class="stat-value">${totalRecords}</div>
+                                        <div class="stat-label">Total Records</div>
                                     </div>
                                     <div class="stat-card">
                                         <div class="stat-icon icon-present">
                                             <i class="fas fa-check"></i>
                                         </div>
-                                        <div class="stat-value">${presentClasses}</div>
-                                        <div class="stat-label">Classes Attended</div>
+                                        <div class="stat-value">${presentCount}</div>
+                                        <div class="stat-label">Present</div>
                                     </div>
                                     <div class="stat-card">
                                         <div class="stat-icon icon-absent">
                                             <i class="fas fa-times"></i>
                                         </div>
-                                        <div class="stat-value">${absentClasses}</div>
-                                        <div class="stat-label">Classes Missed</div>
+                                        <div class="stat-value">${absentCount}</div>
+                                        <div class="stat-label">Absent</div>
                                     </div>
                                     <div class="stat-card">
                                         <div class="stat-icon icon-percentage">
-                                            <i class="fas fa-percent"></i>
+                                            <i class="fas fa-clock"></i>
                                         </div>
-                                        <div class="stat-value">${lateClasses}</div>
-                                        <div class="stat-label">Late Arrivals</div>
+                                        <div class="stat-value">${lateCount}</div>
+                                        <div class="stat-label">Late</div>
                                     </div>
                                 </div>
 
@@ -574,27 +585,20 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="searchQuery" placeholder="Search by course or date..." value="${param.searchQuery}">
+                                                    <input type="text" class="form-control" name="searchQuery" 
+                                                           placeholder="Search by module or date..." value="${param.searchQuery}">
                                                     <button class="btn btn-primary" type="submit">
                                                         <i class="fas fa-search"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <div class="d-flex gap-2">
-                                                    <select class="form-select" name="courseFilter" onchange="this.form.submit()">
-                                                        <option value="" ${empty param.courseFilter ? 'selected' : ''}>All Courses</option>
-                                                        <c:forEach var="course" items="${coursesList}">
-                                                            <option value="${course.id}" ${param.courseFilter eq course.id ? 'selected' : ''}>${course.name}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <select class="form-select" name="statusFilter" onchange="this.form.submit()">
-                                                        <option value="" ${empty param.statusFilter ? 'selected' : ''}>All Status</option>
-                                                        <option value="Present" ${param.statusFilter eq 'Present' ? 'selected' : ''}>Present</option>
-                                                        <option value="Absent" ${param.statusFilter eq 'Absent' ? 'selected' : ''}>Absent</option>
-                                                        <option value="Late" ${param.statusFilter eq 'Late' ? 'selected' : ''}>Late</option>
-                                                    </select>
-                                                </div>
+                                                <select class="form-select" name="statusFilter" onchange="this.form.submit()">
+                                                    <option value="">All Status</option>
+                                                    <option value="Present" ${param.statusFilter eq 'Present' ? 'selected' : ''}>Present</option>
+                                                    <option value="Absent" ${param.statusFilter eq 'Absent' ? 'selected' : ''}>Absent</option>
+                                                    <option value="Late" ${param.statusFilter eq 'Late' ? 'selected' : ''}>Late</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </form>
@@ -606,48 +610,43 @@
                                         <thead>
                                             <tr>
                                                 <th>Date</th>
-                                                <th>Course</th>
+                                                <th>Module ID</th>
                                                 <th>Status</th>
-                                                <th>Time</th>
-                                                <th>Duration</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="record" items="${attendanceRecords}">
                                                 <tr>
-                                                    <td>${record.date}</td>
-                                                    <td>${record.courseName}</td>
+                                                    <td>${record.formattedDate}</td>
+                                                    <td>${record.moduleid}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${record.status eq 'Present'}">
+                                                            <c:when test="${record.attendanceStatus eq 'Present'}">
                                                                 <span class="attendance-status status-present">
-                                                                    <i class="fas fa-check-circle me-1"></i> ${record.status}
+                                                                    <i class="fas fa-check-circle me-1"></i> Present
                                                                 </span>
                                                             </c:when>
-                                                            <c:when test="${record.status eq 'Absent'}">
+                                                            <c:when test="${record.attendanceStatus eq 'Absent'}">
                                                                 <span class="attendance-status status-absent">
-                                                                    <i class="fas fa-times-circle me-1"></i> ${record.status}
+                                                                    <i class="fas fa-times-circle me-1"></i> Absent
                                                                 </span>
                                                             </c:when>
-                                                            <c:when test="${record.status eq 'Late'}">
+                                                            <c:when test="${record.attendanceStatus eq 'Late'}">
                                                                 <span class="attendance-status status-late">
-                                                                    <i class="fas fa-exclamation-circle me-1"></i> ${record.status}
+                                                                    <i class="fas fa-exclamation-circle me-1"></i> Late
                                                                 </span>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <span class="attendance-status">${record.status}</span>
+                                                                <span class="attendance-status">${record.attendanceStatus}</span>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
-                                                    <td>${record.time}</td>
-                                                    <td>${record.duration}</td>
                                                 </tr>
                                             </c:forEach>
                                             
-                                            <!-- If no records, show a message -->
                                             <c:if test="${empty attendanceRecords}">
                                                 <tr>
-                                                    <td colspan="5" class="text-center py-4">
+                                                    <td colspan="3" class="text-center py-4">
                                                         <div class="alert alert-info mb-0">
                                                             <i class="fas fa-info-circle me-2"></i> No attendance records found.
                                                         </div>
@@ -664,17 +663,17 @@
                                         <nav aria-label="Page navigation">
                                             <ul class="pagination">
                                                 <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                                    <a class="page-link" href="AttendanceServlet?page=${currentPage - 1}${not empty param.searchQuery ? '&searchQuery=' : ''}${param.searchQuery}${not empty param.courseFilter ? '&courseFilter=' : ''}${param.courseFilter}${not empty param.statusFilter ? '&statusFilter=' : ''}${param.statusFilter}" aria-label="Previous">
+                                                    <a class="page-link" href="AttendanceServlet?page=${currentPage - 1}${not empty param.searchQuery ? '&searchQuery=' : ''}${param.searchQuery}${not empty param.statusFilter ? '&statusFilter=' : ''}${param.statusFilter}" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                                 <c:forEach begin="1" end="${totalPages}" var="i">
                                                     <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                        <a class="page-link" href="AttendanceServlet?page=${i}${not empty param.searchQuery ? '&searchQuery=' : ''}${param.searchQuery}${not empty param.courseFilter ? '&courseFilter=' : ''}${param.courseFilter}${not empty param.statusFilter ? '&statusFilter=' : ''}${param.statusFilter}">${i}</a>
+                                                        <a class="page-link" href="AttendanceServlet?page=${i}${not empty param.searchQuery ? '&searchQuery=' : ''}${param.searchQuery}${not empty param.statusFilter ? '&statusFilter=' : ''}${param.statusFilter}">${i}</a>
                                                     </li>
                                                 </c:forEach>
                                                 <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                                    <a class="page-link" href="AttendanceServlet?page=${currentPage + 1}${not empty param.searchQuery ? '&searchQuery=' : ''}${param.searchQuery}${not empty param.courseFilter ? '&courseFilter=' : ''}${param.courseFilter}${not empty param.statusFilter ? '&statusFilter=' : ''}${param.statusFilter}" aria-label="Next">
+                                                    <a class="page-link" href="AttendanceServlet?page=${currentPage + 1}${not empty param.searchQuery ? '&searchQuery=' : ''}${param.searchQuery}${not empty param.statusFilter ? '&statusFilter=' : ''}${param.statusFilter}" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>

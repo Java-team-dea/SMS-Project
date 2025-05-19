@@ -1,21 +1,44 @@
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\DAO\CourseDAO.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\CourseViewServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\DAO\StudentDAO.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\model\Grade.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\ManageCoursesServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\StudentRegistrationServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\DAO\GradeDAO.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\model\Admin.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\GradeViewServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\DAO\AdminDAO.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\model\Courses.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\AdminStudentView.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\LoginServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\LogoutServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\ManageGradesServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\UpdateProfileServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\ProfileServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\util\Database.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\model\Student.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\AdminLoginServlet.java
-C:\DEA Project\SMS-Project\StudentMangement\src\main\java\com\controller\StudentCountServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\StudentRegistrationServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\model\Student.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\DAO\AdminDAO.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\GradeViewServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\AdminStudentView.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\UpdateFeeServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\LoginServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\AttendanceListServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\EditStudentServlet2.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\DAO\FeeDAO.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\LogoutServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\DeleteAttendanceServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\DAO\StudentDAO.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\DAO\GradeDAO.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\DAO\CourseDAO.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\DeleteStudentServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\util\Database.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\UpdateProfileServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\model\Fee.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\StudentListServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\FeeListServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\EditFeeServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\ProfileServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\ManageCoursesServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\model\Admin.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\mycompany\studentmanagement\resources\JakartaEE8Resource.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\AttendanceServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\EditCourseServlet1.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\model\Attendance.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\DeleteFeeServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\CourseViewServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\UpdateCourseServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\model\Courses.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\UpdateStudentServlet1.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\AddFeeServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\mycompany\studentmanagemen\JakartaRestConfiguration.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\MarkAttendanceServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\model\Grade.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\ManageGradesServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\MyCoursesServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\AdminLoginServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\StudentCountServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\controller\DeleteCourseServlet.java
+D:\ourcopy\com.mycompany_StudentManagement_war_1.0-SNAPSHOT\src\main\java\com\DAO\AttendanceDAO.java

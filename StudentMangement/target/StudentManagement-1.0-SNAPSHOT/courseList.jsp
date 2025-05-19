@@ -1,11 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal | Manage Courses</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -299,23 +303,29 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Course ID</th>
+                                     
                                         <th>Course Name</th>
-                                        <th>Department</th>
+                                        <th>Duration</th>
+                                        <th>Credits</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>  
+                                <form action="CourseViewServlet" method="post">
+                                    <button type="submit" class="btn btn-success">View</button>
+                                </form>
+                                    
+                                    
                                     <c:forEach var="course" items="${courseList}">
                                         <tr>
-                                            <td>${course.id}</td>
                                             <td>${course.name}</td>
-                                            <td>${course.department}</td>
+                                            <td>${course.duration}</td>
+                                            <td>${course.credits}</td>
                                             <td>
-                                                <a href="editCourse.jsp?id=${course.id}" class="btn btn-action btn-edit">
+                                                <a href="EditCourseServlet1?id=${course.courseID}" class="btn btn-action btn-edit">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <a href="deleteCourse?id=${course.id}" class="btn btn-action btn-delete" 
+                                                <a href="deleteCourse?id=${course.courseID}" class="btn btn-action btn-delete" 
                                                    onclick="return confirm('Are you sure you want to delete this course?')">
                                                     <i class="fas fa-trash-alt"></i> Delete
                                                 </a>
@@ -343,5 +353,25 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+      
+    <script>
+        <%
+            String successMessage = (String) request.getAttribute("successMessage");
+            if (successMessage != null) {
+        %>
+                swal("Success!", "<%= successMessage %>", "success");
+        <%
+            }
+            
+            String errorMessage = (String) request.getAttribute("errorMessage");
+            if (errorMessage != null) {
+        %>
+                swal("Error!", "<%= errorMessage %>", "error");
+        <%
+            }
+        %>
+    </script>
+    
 </body>
 </html>

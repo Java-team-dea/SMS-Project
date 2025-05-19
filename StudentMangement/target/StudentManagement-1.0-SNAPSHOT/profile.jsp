@@ -382,7 +382,7 @@
                 <div class="container">
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="index.jsp" class="text-decoration-none university-brand">
-                            <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                            <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                             <div>
                                 <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                                 <div class="d-flex align-items-center">
@@ -444,7 +444,7 @@
                                     <a href="studentDashboard.jsp" class="nav-link">
                                         <i class="fas fa-tachometer-alt"></i> Dashboard
                                     </a>
-                                    <a href="myCourses.jsp" class="nav-link">
+                                    <a href="MyCoursesServlet" class="nav-link">
                                         <i class="fas fa-book"></i> My Courses
                                     </a>
                                     <a href="myAttendance.jsp" class="nav-link">

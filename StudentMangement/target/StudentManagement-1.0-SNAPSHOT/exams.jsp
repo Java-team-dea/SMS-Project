@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal | Exams</title>
+    <title>Student Portal | Examination Schedule</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -190,6 +190,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             backdrop-filter: blur(10px);
+            margin-bottom: 1.5rem;
         }
 
         .exams-header {
@@ -218,102 +219,123 @@
             padding: 1.5rem;
         }
 
-        /* Exam Table Styles */
-        .exams-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        .exams-table th {
-            background-color: var(--gray-100);
-            color: var(--dark-color);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            padding: 1rem;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--gray-200);
-        }
-
-        .exams-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--gray-200);
-            vertical-align: middle;
-        }
-
-        .exams-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .exams-table tr:hover {
+        /* Info alerts */
+        .alert-panel {
+            border-left: 4px solid var(--primary-color);
             background-color: var(--accent-color);
-        }
-
-        /* Status Badge Styles */
-        .status-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .status-upcoming {
-            background-color: #e8f5e9;
-            color: var(--primary-color);
-        }
-
-        .status-completed {
-            background-color: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .status-missed {
-            background-color: #ffebee;
-            color: #d32f2f;
-        }
-
-        /* Button Styles */
-        .btn-register {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 600;
+            padding: 1rem;
             border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 146, 69, 0.3);
-        }
-
-        /* Empty State */
-        .exams-empty {
-            text-align: center;
-            padding: 3rem 1.5rem;
-        }
-
-        .exams-empty i {
-            font-size: 3rem;
-            color: var(--gray-300);
             margin-bottom: 1rem;
         }
-
-        .exams-empty h5 {
+        
+        .alert-panel.warning {
+            border-left-color: #ff9800;
+            background-color: #fff3e0;
+        }
+        
+        .alert-panel.danger {
+            border-left-color: #f44336;
+            background-color: #ffebee;
+        }
+        
+        .alert-panel.info {
+            border-left-color: #2196f3;
+            background-color: #e3f2fd;
+        }
+        
+        .alert-panel h5 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--dark-color);
+            font-size: 1rem;
+        }
+        
+        .alert-panel.warning h5 {
+            color: #e65100;
+        }
+        
+        .alert-panel.danger h5 {
+            color: #b71c1c;
+        }
+        
+        .alert-panel.info h5 {
+            color: #0d47a1;
+        }
+        
+        .alert-panel p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Timeline styles */
+        .timeline {
+            position: relative;
+            padding: 0;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 3px;
+            background: var(--gray-200);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 45px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-badge i {
+            font-size: 1rem;
+        }
+
+        .timeline-panel {
+            padding: 1rem;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-date {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray-600);
             margin-bottom: 0.5rem;
         }
 
-        .exams-empty p {
-            color: var(--gray-600);
-            max-width: 400px;
-            margin: 0 auto;
+        .timeline-title {
+            margin-bottom: 0.35rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .timeline-details {
+            margin-bottom: 0;
+            font-size: 0.9rem;
         }
 
         /* Footer */
@@ -382,11 +404,90 @@
                 gap: 1rem;
                 text-align: center;
             }
-
-            .exams-table {
-                display: block;
-                overflow-x: auto;
+            
+            .timeline:before {
+                left: 15px;
             }
+            
+            .timeline-item {
+                padding-left: 40px;
+            }
+            
+            .timeline-badge {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+            }
+            
+            .timeline-badge i {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* File download link styles */
+        .file-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: var(--gray-100);
+            border-radius: 8px;
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .file-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .file-link i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        /* Action buttons */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .action-btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+        }
+        
+        .action-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 146, 69, 0.3);
+            color: white;
+        }
+        
+        .action-btn-secondary {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .action-btn-secondary:hover {
+            background-color: var(--gray-100);
+            color: var(--dark-color);
+        }
+        
+        .action-btn i {
+            margin-right: 0.5rem;
         }
     </style>
 </head>
@@ -397,7 +498,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="index.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
@@ -442,7 +543,7 @@
                                 <a href="studentDashboard.jsp" class="nav-link">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
-                                <a href="myCourses.jsp" class="nav-link">
+                                <a href="MyCoursesServlet" class="nav-link">
                                     <i class="fas fa-book"></i> My Courses
                                 </a>
                                 <a href="myAttendance.jsp" class="nav-link">
@@ -469,104 +570,190 @@
                     
                     <!-- Main Exams Area -->
                     <div class="col-lg-9">
+                        <!-- Exam Announcements Section -->
                         <div class="exams-card">
                             <div class="exams-header">
-                                <h4><i class="fas fa-file-alt me-2"></i> Upcoming Exams</h4>
+                                <h4><i class="fas fa-bullhorn me-2"></i> Examination Announcements</h4>
                             </div>
                             <div class="exams-body">
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.student.exams}">
-                                        <div class="table-responsive">
-                                            <table class="exams-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Course</th>
-                                                        <th>Exam Date</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="exam" items="${sessionScope.student.exams}">
-                                                        <tr>
-                                                            <td>
-                                                                <div class="fw-semibold">${exam.course}</div>
-                                                            </td>
-                                                            <td>${exam.date}</td>
-                                                            <td>
-                                                                <c:choose>
-                                                                    <c:when test="${exam.status == 'Upcoming'}">
-                                                                        <span class="status-badge status-upcoming">Upcoming</span>
-                                                                    </c:when>
-                                                                    <c:when test="${exam.status == 'Completed'}">
-                                                                        <span class="status-badge status-completed">Completed</span>
-                                                                    </c:when>
-                                                                    <c:when test="${exam.status == 'Missed'}">
-                                                                        <span class="status-badge status-missed">Missed</span>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <span class="status-badge">${exam.status}</span>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </td>
-                                                            <td>
-                                                                <c:if test="${exam.status == 'Upcoming'}">
-                                                                    <button class="btn btn-register">Register</button>
-                                                                </c:if>
-                                                                <c:if test="${exam.status == 'Completed'}">
-                                                                    <button class="btn btn-outline-primary">View Results</button>
-                                                                </c:if>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                <!-- Primary Announcement -->
+                                <div class="alert-panel">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="fas fa-bullhorn fa-2x text-success"></i>
                                         </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="exams-empty">
-                                            <i class="fas fa-calendar-times"></i>
-                                            <h5>No exams found</h5>
-                                            <p>You don't have any upcoming exams at the moment. Check back later or contact your course administrator.</p>
+                                        <div>
+                                            <h5>End of Semester Examinations</h5>
+                                            <p>End of Semester Exams for 2025 are scheduled from June 5 to June 25, 2025. Please ensure you've registered for all required exams and paid any outstanding exam fees.</p>
+                                            <a href="#" class="file-link">
+                                                <i class="fas fa-file-pdf"></i> Complete Exam Schedule
+                                            </a>
                                         </div>
-                                    </c:otherwise>
-                                </c:choose>
+                                    </div>
+                                </div>
+                                
+                                <!-- Warning Announcement -->
+                                <div class="alert-panel warning">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Important Deadline Reminder</h5>
+                                            <p>Exam registration deadline is May 25, 2025. Students with attendance below 80% must apply for special consideration by May 20, 2025.</p>
+                                            <a href="#" class="action-btn action-btn-primary mt-2">
+                                                <i class="fas fa-edit"></i> Register for Exams
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Urgent Announcement -->
+                                <div class="alert-panel danger">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Venue Change Notice</h5>
+                                            <p>Due to ongoing renovations, all examinations previously scheduled for Main Hall B have been relocated to the New Auditorium. This affects PHYS301, CHEM202, and BIO105 exams. Please check your hall tickets for updated venue information.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Info Announcement -->
+                                <div class="alert-panel info">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="fas fa-info-circle fa-2x text-info"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Examination Regulations</h5>
+                                            <p>Students are required to bring their university ID cards and hall tickets to all exams. Electronic devices are strictly prohibited in examination halls except for approved calculators. Please review the complete examination regulations on the university website.</p>
+                                            <a href="#" class="file-link">
+                                                <i class="fas fa-file-alt"></i> Exam Regulations
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Success Announcement -->
+                                <div class="alert-panel">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="fas fa-chalkboard-teacher fa-2x text-success"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Exam Preparation Workshops</h5>
+                                            <p>The Student Success Center is offering pre-exam review workshops for core subjects from May 20-30, 2025. Sessions will cover exam strategies, practice questions, and key topic reviews. Registration is required as seats are limited.</p>
+                                            <div class="mt-2">
+                                                <a href="#" class="action-btn action-btn-primary me-2">
+                                                    <i class="fas fa-calendar-check"></i> Register for Workshops
+                                                </a>
+                                                <a href="#" class="action-btn action-btn-secondary">
+                                                    <i class="fas fa-list"></i> View Schedule
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Additional Exam Resources Section -->
-                        <div class="exams-card mt-4">
+                        <!-- Exam Timeline Card -->
+                        <div class="exams-card">
                             <div class="exams-header">
-                                <h4><i class="fas fa-info-circle me-2"></i> Exam Resources</h4>
+                                <h4><i class="fas fa-calendar-alt me-2"></i> Examination Timeline</h4>
                             </div>
                             <div class="exams-body">
-                                <div class="row g-4">
-                                    <div class="col-md-4">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><i class="fas fa-book-reader text-primary me-2"></i>Study Resources</h5>
-                                                <p class="card-text">Access past papers, study materials, and exam guides.</p>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">Access Resources</a>
-                                            </div>
+                                <ul class="timeline">
+                                    <li class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <i class="fas fa-edit"></i>
                                         </div>
+                                        <div class="timeline-panel">
+                                            <span class="timeline-date">May 15 - May 25, 2025</span>
+                                            <h5 class="timeline-title">Exam Registration Period</h5>
+                                            <p class="timeline-details">Students must register for all exams through the student portal. Late registration will incur additional fees.</p>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <i class="fas fa-money-bill"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <span class="timeline-date">May 15 - May 27, 2025</span>
+                                            <h5 class="timeline-title">Exam Fee Payment Deadline</h5>
+                                            <p class="timeline-details">All examination fees must be paid by this date. Students with outstanding fees will not be permitted to sit for exams.</p>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <i class="fas fa-ticket-alt"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <span class="timeline-date">May 30 - June 3, 2025</span>
+                                            <h5 class="timeline-title">Hall Ticket Distribution</h5>
+                                            <p class="timeline-details">Hall tickets will be available for download via the student portal. Physical copies can be collected from the examination office.</p>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <span class="timeline-date">June 5 - June 25, 2025</span>
+                                            <h5 class="timeline-title">Examination Period</h5>
+                                            <p class="timeline-details">All end-of-semester examinations will be conducted during this period as per the published schedule.</p>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item">
+                                        <div class="timeline-badge">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <span class="timeline-date">July 15, 2025</span>
+                                            <h5 class="timeline-title">Result Announcement</h5>
+                                            <p class="timeline-details">Examination results will be published on the student portal. SMS notifications will also be sent to registered mobile numbers.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Access Links -->
+                        <div class="exams-card">
+                            <div class="exams-header">
+                                <h4><i class="fas fa-link me-2"></i> Quick Access</h4>
+                            </div>
+                            <div class="exams-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <a href="#" class="card text-center p-3 h-100 text-decoration-none">
+                                            <div class="mb-2">
+                                                <i class="fas fa-clipboard-list fa-3x text-success"></i>
+                                            </div>
+                                            <h5 class="mb-1">Exam Registration</h5>
+                                            <p class="text-muted small mb-0">Register for upcoming exams</p>
+                                        </a>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><i class="fas fa-question-circle text-primary me-2"></i>Exam FAQ</h5>
-                                                <p class="card-text">Find answers to common questions about exam procedures.</p>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">View FAQ</a>
+                                        <a href="#" class="card text-center p-3 h-100 text-decoration-none">
+                                            <div class="mb-2">
+                                                <i class="fas fa-print fa-3x text-primary"></i>
                                             </div>
-                                        </div>
+                                            <h5 class="mb-1">Hall Tickets</h5>
+                                            <p class="text-muted small mb-0">Download your exam hall tickets</p>
+                                        </a>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><i class="fas fa-exclamation-triangle text-primary me-2"></i>Exam Rules</h5>
-                                                <p class="card-text">Review examination rules, regulations and guidelines.</p>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">Read Rules</a>
+                                        <a href="#" class="card text-center p-3 h-100 text-decoration-none">
+                                            <div class="mb-2">
+                                                <i class="fas fa-question-circle fa-3x text-warning"></i>
                                             </div>
-                                        </div>
+                                            <h5 class="mb-1">Exam Support</h5>
+                                            <p class="text-muted small mb-0">Get help with exam-related issues</p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -581,19 +768,18 @@
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-copyright">
-                        © 2025 NSBM Green University. All Rights Reserved.
+                        &copy; 2025 NSBM Green University. All rights reserved.
                     </div>
                     <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@

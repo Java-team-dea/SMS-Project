@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -234,6 +235,11 @@
         .alert {
             border-radius: 8px;
             border-left: 4px solid #dc3545;
+            margin-bottom: 1.5rem;
+        }
+        
+        .alert-success {
+            border-left-color: #28a745;
         }
         
         @media (max-width: 576px) {
@@ -260,7 +266,7 @@
                 </div>
             </a>
             <div>
-                <a href="#" class="btn btn-light btn-sm rounded-circle shadow-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Need Help?">
+                <a href="help.jsp" class="btn btn-light btn-sm rounded-circle shadow-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Need Help?">
                     <i class="fas fa-question-circle text-muted"></i>
                 </a>
             </div>
@@ -275,10 +281,18 @@
                 <p class="text-muted small">Access your student account</p>
             </div>
             
-            <!-- Show error message if exists -->
+            <!-- Error message display -->
             <c:if test="${not empty errorMessage}">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="fas fa-exclamation-circle me-2"></i>${errorMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </c:if>
+            
+            <!-- Success message display -->
+            <c:if test="${not empty successMessage}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>${successMessage}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </c:if>
@@ -396,7 +410,6 @@
                 toggleIcon.classList.add('fa-eye-slash');
             }
         }
-        
     </script>
 </body>
 </html>

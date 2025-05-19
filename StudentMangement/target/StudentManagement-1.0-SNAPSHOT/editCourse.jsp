@@ -261,7 +261,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
@@ -284,31 +284,51 @@
                                 <h4><i class="fas fa-edit me-2"></i> Edit Course</h4>
                             </div>
                             <div class="form-body">
-                                <form action="ManageCoursesServlet" method="post">
-                                    <input type="hidden" name="id" value="${course.id}">
-                                    
-                                    <div class="mb-3">
-                                        <label for="courseCode" class="form-label">Course Code</label>
-                                        <input type="text" class="form-control" id="courseCode" name="courseCode" value="${course.courseCode}" required>
-                                    </div>
+                                <!-- Error Message -->
+                                <c:if test="${not empty param.error}">
+                                    <div class="alert alert-danger">${param.error}</div>
+                                </c:if>
+                                
+                                <!-- Success Message -->
+                                <c:if test="${not empty param.success}">
+                                    <div class="alert alert-success">${param.success}</div>
+                                </c:if>
+                                
+                                <form action="UpdateCourseServlet" method="post">
+                                    <input type="hidden" name="id" value="${course.courseID}">
                                     
                                     <div class="mb-3">
                                         <label for="courseName" class="form-label">Course Name</label>
-                                        <input type="text" class="form-control" id="courseName" name="courseName" value="${course.courseName}" required>
+                                        <input type="text" class="form-control" id="courseName" name="courseName" 
+                                               value="${course.name}" required>
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="department" class="form-label">Department</label>
-                                        <input type="text" class="form-control" id="department" name="department" value="${course.department}" required>
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" name="description" 
+                                                  rows="3" required>${course.description}</textarea>
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="duration" class="form-label">Duration</label>
-                                        <input type="text" class="form-control" id="duration" name="duration" value="${course.duration}" required>
+                                        <label for="credits" class="form-label">Credits</label>
+                                        <input type="number" class="form-control" id="credits" name="credits" 
+                                               value="${course.credits}" required min="1">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="duration" class="form-label">Duration (years)</label>
+                                        <input type="number" class="form-control" id="duration" name="duration" 
+                                               value="${course.duration}" required min="1">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="departmentID" class="form-label">Department ID</label>
+                                        <input type="number" class="form-control" id="departmentID" name="departmentID" 
+                                               value="${course.departmentID}" required min="1">
                                     </div>
                                     
                                     <div class="d-flex justify-content-between align-items-center mt-4">
-                                        <a href="courseList.jsp" class="btn btn-link">
+                                        <a href="CourseViewServlet" class="btn btn-link">
                                             <i class="fas fa-arrow-left me-1"></i> Back to Course List
                                         </a>
                                         <button type="submit" class="btn btn-primary">

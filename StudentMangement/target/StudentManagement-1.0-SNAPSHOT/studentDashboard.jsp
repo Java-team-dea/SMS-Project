@@ -1,5 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%
+    // Prevent browser caching
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+
+    // Check if student is logged in
+    if (session.getAttribute("student") == null) {
+        response.sendRedirect("studentLogin.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,7 +498,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="index.jsp" class="text-decoration-none university-brand">
-                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
@@ -527,10 +543,10 @@
                                 <a href="studentDashboard.jsp" class="nav-link active">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
-                                <a href="myCourses.jsp" class="nav-link">
+                                <a href="MyCoursesServlet" class="nav-link">
                                     <i class="fas fa-book"></i> My Courses
                                 </a>
-                                <a href="myAttendance.jsp" class="nav-link">
+                                <a href="AttendanceServlet" class="nav-link">
                                     <i class="fas fa-calendar-check"></i> Attendance
                                 </a>
                                 <a href="myGrades.jsp" class="nav-link">
