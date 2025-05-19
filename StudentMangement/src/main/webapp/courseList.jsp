@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal | Manage Courses</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -256,7 +258,7 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
-                        <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
+                        <img src="images/university-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
@@ -267,7 +269,7 @@
                     </a>
                     
                     <div class="dropdown">
-                        <button class="btn profile-btn dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                                     A
@@ -276,8 +278,7 @@
                             </div>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="adminProfile.jsp"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2 text-primary"></i> Notifications</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2 text-primary"></i> Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="LogoutServlet"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
@@ -321,7 +322,7 @@
                                             <td>${course.duration}</td>
                                             <td>${course.credits}</td>
                                             <td>
-                                                <a href="editCourse.jsp?id=${course.courseID}" class="btn btn-action btn-edit">
+                                                <a href="EditCourseServlet1?id=${course.courseID}" class="btn btn-action btn-edit">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
                                                 <a href="deleteCourse?id=${course.courseID}" class="btn btn-action btn-delete" 
@@ -352,5 +353,25 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+      
+    <script>
+        <%
+            String successMessage = (String) request.getAttribute("successMessage");
+            if (successMessage != null) {
+        %>
+                swal("Success!", "<%= successMessage %>", "success");
+        <%
+            }
+            
+            String errorMessage = (String) request.getAttribute("errorMessage");
+            if (errorMessage != null) {
+        %>
+                swal("Error!", "<%= errorMessage %>", "error");
+        <%
+            }
+        %>
+    </script>
+    
 </body>
 </html>

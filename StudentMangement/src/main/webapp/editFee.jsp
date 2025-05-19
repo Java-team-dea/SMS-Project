@@ -80,16 +80,6 @@
             color: var(--gray-600);
             margin-bottom: 0;
         }
-        .admin-badge {
-            background-color: #3949AB;
-            font-size: 0.7rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 30px;
-            font-weight: 500;
-            color: white;
-            margin-left: 0.5rem;
-            letter-spacing: 0.5px;
-        }
 
         .student-badge {
             background-color: #FF5722;
@@ -273,34 +263,16 @@
         <header class="app-header py-3">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
+                    <a href="index.jsp" class="text-decoration-none university-brand">
                         <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
                                 <p class="university-system">Student Management System</p>
-                                <span class="admin-badge">ADMIN PORTAL</span>
+                                <span class="student-badge">ADMIN PORTAL</span>
                             </div>
                         </div>
                     </a>
-                    
-                    <div class="dropdown">
-                        <button class="btn profile-btn dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="d-flex align-items-center">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                    A
-                                </div>
-                                <span class="ms-2 d-none d-md-inline">Admin</span>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="adminProfile.jsp"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2 text-primary"></i> Notifications</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2 text-primary"></i> Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="LogoutServlet"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </header>
@@ -316,52 +288,61 @@
                             </div>
                             <div class="form-body">
                                 <form action="UpdateFeeServlet" method="post">
-                                    <div class="mb-4">
-                                        <label for="studentId" class="form-label">Student ID</label>
-                                        <input type="text" class="form-control" id="studentId" name="studentId" 
-                                               value="${fee.studentId}" readonly>
-                                        <small class="text-muted">This field cannot be edited</small>
-                                    </div>
+    <!-- Add hidden field for record ID -->
+    <input type="hidden" name="record" value="${fee.record}">
+    
+    <div class="mb-4">
+        <label for="studentId" class="form-label">Student ID</label>
+        <input type="text" class="form-control" id="studentId" name="studentId" 
+               value="${fee.id}" readonly>
+        <small class="text-muted">This field cannot be edited</small>
+    </div>
 
-                                    <div class="mb-4">
-                                        <label for="totalFee" class="form-label">Total Fee Amount</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">$</span>
-                                            <input type="text" class="form-control" id="totalFee" name="totalFee" 
-                                                   value="${fee.totalFee}" required>
-                                        </div>
-                                    </div>
+    <div class="mb-4">
+        <label for="courseId" class="form-label">Course ID</label>
+        <input type="text" class="form-control" id="courseId" name="courseId" 
+               value="${fee.courseId}" readonly>
+    </div>
 
-                                    <div class="mb-4">
-                                        <label for="paidAmount" class="form-label">Paid Amount</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">$</span>
-                                            <input type="text" class="form-control" id="paidAmount" name="paidAmount" 
-                                                   value="${fee.paidAmount}" required>
-                                        </div>
-                                    </div>
+    <div class="mb-4">
+        <label for="totalFee" class="form-label">Total Fee Amount</label>
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="number" step="0.01" min="0" class="form-control" id="totalFee" name="totalFee" 
+                   value="${fee.totalFee}" required>
+        </div>
+    </div>
 
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-info-circle me-2"></i>
-                                                    <strong>Balance:</strong> 
-                                                    $${fee.totalFee - fee.paidAmount}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+    <div class="mb-4">
+        <label for="paidAmount" class="form-label">Paid Amount</label>
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="number" step="0.01" min="0" max="${fee.totalFee}" class="form-control" id="paidAmount" name="paidAmount" 
+                   value="${fee.paidAmount}" required>
+        </div>
+    </div>
 
-                                    <div class="d-flex justify-content-between mt-4">
-                                        <a href="feesList.jsp" class="btn btn-secondary">
-                                            <i class="fas fa-arrow-left me-2"></i>Cancel
-                                        </a>
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-save me-2"></i>Update Fee Information
-                                        </button>
-                                    </div>
-                                </form>
+    <div class="mb-3">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Balance:</strong> 
+                    $<span id="balanceDisplay">${fee.totalFee - fee.paidAmount}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="feeList.jsp" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Cancel
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save me-2"></i>Update Fee Information
+        </button>
+    </div>
+</form>
                             </div>
                         </div>
                     </div>
@@ -389,24 +370,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Calculate balance in real-time
-        document.addEventListener('DOMContentLoaded', function() {
-            const totalFeeInput = document.getElementById('totalFee');
-            const paidAmountInput = document.getElementById('paidAmount');
-            const balanceInfo = document.querySelector('.alert-info strong');
+    document.addEventListener('DOMContentLoaded', function() {
+        const totalFeeInput = document.getElementById('totalFee');
+        const paidAmountInput = document.getElementById('paidAmount');
+        const balanceDisplay = document.getElementById('balanceDisplay');
+        
+        function updateBalance() {
+            const totalFee = parseFloat(totalFeeInput.value) || 0;
+            const paidAmount = parseFloat(paidAmountInput.value) || 0;
+            const balance = totalFee - paidAmount;
             
-            function updateBalance() {
-                const totalFee = parseFloat(totalFeeInput.value) || 0;
-                const paidAmount = parseFloat(paidAmountInput.value) || 0;
-                const balance = totalFee - paidAmount;
-                
-                document.querySelector('.alert-info').innerHTML = 
-                    `<i class="fas fa-info-circle me-2"></i><strong>Balance:</strong> $${balance.toFixed(2)}`;
+            balanceDisplay.textContent = balance.toFixed(2);
+            
+            // Validate paid amount doesn't exceed total fee
+            if (paidAmount > totalFee) {
+                paidAmountInput.setCustomValidity('Paid amount cannot exceed total fee');
+            } else {
+                paidAmountInput.setCustomValidity('');
             }
-            
-            totalFeeInput.addEventListener('input', updateBalance);
-            paidAmountInput.addEventListener('input', updateBalance);
-        });
-    </script>
+        }
+        
+        totalFeeInput.addEventListener('input', updateBalance);
+        paidAmountInput.addEventListener('input', updateBalance);
+    });
+</script>
 </body>
 </html>

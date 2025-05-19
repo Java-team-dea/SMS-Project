@@ -1,5 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.model.Fee" %>
+<%@ page import="com.DAO.FeeDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.model.Student" %>
+
+<%
+    // Prevent browser caching
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+
+    // Check if student is logged in
+    if (session.getAttribute("student") == null) {
+        response.sendRedirect("studentLogin.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,6 +499,52 @@
     </style>
 </head>
 <body>
+    <%
+        // Check if user is logged in
+        Student student = (Student) session.getAttribute("student");
+        if (student == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+        
+        // Get the student ID from session
+        int studentId = student.getId();
+        
+        // Get fees for the logged-in student
+        FeeDAO feeDAO = new FeeDAO();
+        ArrayList<Fee> feeList = new ArrayList<>();
+        
+        // Get all fees from database
+        ArrayList<Fee> allFees = feeDAO.getFeeList();
+        
+        // Filter fees for the current student
+        if (allFees != null) {
+            for (Object obj : allFees) {
+                Fee fee = (Fee) obj;
+                if (fee.getId() == studentId) {
+                    feeList.add(fee);
+                }
+            }
+        }
+        
+        // Calculate totals
+        double totalAmount = 0;
+        double paidAmount = 0;
+        double dueAmount = 0;
+        
+        for (Fee fee : feeList) {
+            totalAmount += fee.getTotalFee();
+            paidAmount += fee.getPaidAmount();
+            dueAmount += fee.getDueAmount();
+        }
+        
+        // Set attributes for JSP
+        request.setAttribute("feeList", feeList);
+        request.setAttribute("totalAmount", totalAmount);
+        request.setAttribute("paidAmount", paidAmount);
+        request.setAttribute("dueAmount", dueAmount);
+    %>
+
     <div class="app-wrapper">
         <!-- Header -->
         <header class="app-header py-3">
@@ -536,7 +599,7 @@
                                 <a href="myCourses.jsp" class="nav-link">
                                     <i class="fas fa-book"></i> My Courses
                                 </a>
-                                <a href="myAttendance.jsp" class="nav-link">
+                                <a href="AttendanceServlet" class="nav-link">
                                     <i class="fas fa-calendar-check"></i> Attendance
                                 </a>
                                 <a href="myGrades.jsp" class="nav-link">
@@ -572,16 +635,6 @@
                             <div class="dashboard-body">
                                 <!-- Fee Summary Cards -->
                                 <div class="fee-summary">
-                                    <c:set var="totalAmount" value="0" />
-                                    <c:set var="paidAmount" value="0" />
-                                    <c:set var="dueAmount" value="0" />
-                                    
-                                    <c:forEach var="fee" items="${feeList}">
-                                        <c:set var="totalAmount" value="${totalAmount + fee.total}" />
-                                        <c:set var="paidAmount" value="${paidAmount + fee.paid}" />
-                                        <c:set var="dueAmount" value="${dueAmount + fee.due}" />
-                                    </c:forEach>
-                                    
                                     <div class="fee-card total">
                                         <div class="fee-icon total">
                                             <i class="fas fa-dollar-sign"></i>
@@ -613,51 +666,60 @@
                                         <h4><i class="fas fa-history me-2"></i> Fee Details</h4>
                                     </div>
                                     <div class="dashboard-body table-responsive">
-                                        <table class="fee-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Description</th>
-                                                    <th>Total Amount</th>
-                                                    <th>Paid Amount</th>
-                                                    <th>Due Amount</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="fee" items="${feeList}" varStatus="status">
-                                                    <tr>
-                                                        <td>${status.index + 1}</td>
-                                                        <td>Semester ${status.index + 1} Fee</td>
-                                                        <td>$${fee.total}</td>
-                                                        <td>$${fee.paid}</td>
-                                                        <td>$${fee.due}</td>
-                                                        <td>
-                                                            <c:choose>
-                                                                <c:when test="${fee.due == 0}">
-                                                                    <span class="fee-status paid">Paid</span>
-                                                                </c:when>
-                                                                <c:when test="${fee.due < fee.total * 0.5}">
-                                                                    <span class="fee-status pending">Partial</span>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <span class="fee-status overdue">Outstanding</span>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </td>
-                                                        <td>
-                                                            <c:if test="${fee.due > 0}">
-                                                                <button class="btn btn-sm btn-primary">Pay Now</button>
-                                                            </c:if>
-                                                            <c:if test="${fee.due == 0}">
-                                                                <button class="btn btn-sm btn-outline-success">View Receipt</button>
-                                                            </c:if>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                        <c:choose>
+                                            <c:when test="${empty feeList}">
+                                                <div class="alert alert-info">
+                                                    <i class="fas fa-info-circle me-2"></i> No fee records found for you. If this is unexpected, please contact the finance department.
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <table class="fee-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Record #</th>
+                                                            <th>Course ID</th>
+                                                            <th>Total Fee</th>
+                                                            <th>Paid Amount</th>
+                                                            <th>Due Amount</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="fee" items="${feeList}" varStatus="status">
+                                                            <tr>
+                                                                <td>${fee.record}</td>
+                                                                <td>${fee.courseId}</td>
+                                                                <td>$${fee.totalFee}</td>
+                                                                <td>$${fee.paidAmount}</td>
+                                                                <td>$${fee.dueAmount}</td>
+                                                                <td>
+                                                                    <c:choose>
+                                                                        <c:when test="${fee.dueAmount == 0}">
+                                                                            <span class="fee-status paid">Paid</span>
+                                                                        </c:when>
+                                                                        <c:when test="${fee.dueAmount < fee.totalFee * 0.5}">
+                                                                            <span class="fee-status pending">Partial</span>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <span class="fee-status overdue">Outstanding</span>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </td>
+                                                                <td>
+                                                                    <c:if test="${fee.dueAmount > 0}">
+                                                                        <a href="makePayment.jsp?recordId=${fee.record}" class="btn btn-sm btn-primary">Pay Now</a>
+                                                                    </c:if>
+                                                                    <c:if test="${fee.dueAmount == 0}">
+                                                                        <a href="viewReceipt.jsp?recordId=${fee.record}" class="btn btn-sm btn-outline-success">View Receipt</a>
+                                                                    </c:if>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                                 
@@ -674,7 +736,7 @@
                                                 </div>
                                                 <h5>Credit/Debit Card</h5>
                                                 <p>Pay securely using Visa, MasterCard, or American Express</p>
-                                                <button class="btn btn-primary">Pay with Card</button>
+                                                <a href="cardPayment.jsp" class="btn btn-primary">Pay with Card</a>
                                             </div>
                                             
                                             <div class="payment-card">
@@ -683,7 +745,7 @@
                                                 </div>
                                                 <h5>Bank Transfer</h5>
                                                 <p>Pay directly from your bank account via bank transfer</p>
-                                                <button class="btn btn-primary">Bank Details</button>
+                                                <a href="bankDetails.jsp" class="btn btn-primary">Bank Details</a>
                                             </div>
                                             
                                             <div class="payment-card">
@@ -692,7 +754,7 @@
                                                 </div>
                                                 <h5>E-Wallet</h5>
                                                 <p>Pay using your preferred electronic wallet service</p>
-                                                <button class="btn btn-primary">Pay with E-Wallet</button>
+                                                <a href="eWalletPayment.jsp" class="btn btn-primary">Pay with E-Wallet</a>
                                             </div>
                                         </div>
                                     </div>

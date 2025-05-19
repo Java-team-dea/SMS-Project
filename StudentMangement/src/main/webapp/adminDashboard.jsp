@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,7 +84,7 @@
         }
 
         .admin-badge {
-            background-color: #3949AB;
+            background-color: #3F51B5;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;
@@ -543,12 +544,12 @@
                                 <a href="feeList.jsp" class="nav-link">
                                     <i class="fas fa-money-bill-wave"></i> Manage Fees
                                 </a>
-                                <a href="faculty.jsp" class="nav-link">
+<!--                                <a href="faculty.jsp" class="nav-link">
                                     <i class="fas fa-chalkboard-teacher"></i> Manage Faculty
                                 </a>
                                 <a href="departments.jsp" class="nav-link">
                                     <i class="fas fa-building"></i> Manage Departments
-                                </a>
+                                </a>-->
                                 <a href="LogoutServlet" class="nav-link logout">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </a>
@@ -643,15 +644,7 @@
                                         </div>
                                     </a>
                                     
-<!--                                    <a href="gradeList.jsp" class="management-card text-decoration-none">
-                                        <div class="management-icon">
-                                            <i class="fas fa-chart-line"></i>
-                                        </div>
-                                        <div class="management-content">
-                                            <h6>Manage Grades</h6>
-                                        </div>
-                                    </a>-->
-                                    
+
                                        <a href="gradeList" class="management-card text-decoration-none">
                                         <div class="management-icon">
                                             <i class="fas fa-chart-line"></i>

@@ -82,7 +82,7 @@
         }
 
         .admin-badge {
-            background-color: #3949AB;
+            background-color: #3F51B5;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;
@@ -285,33 +285,28 @@
 </head>
 <body>
     <div class="app-wrapper">
-       <!-- Header -->
+        <!-- Header -->
         <header class="app-header py-3">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="adminDashboard.jsp" class="text-decoration-none university-brand">
+                    <a href="index.jsp" class="text-decoration-none university-brand">
                         <img src="images/nsbm-logo.png" alt="University Logo" class="university-logo me-3">
                         <div>
                             <h1 class="university-name">NSBM GREEN UNIVERSITY</h1>
                             <div class="d-flex align-items-center">
                                 <p class="university-system">Student Management System</p>
-                                <span class="admin-badge">ADMIN PORTAL</span>
+                                <span class="admin-badge">ADMIN PANEL</span>
                             </div>
                         </div>
                     </a>
                     
                     <div class="dropdown">
-                        <button class="btn profile-btn dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="d-flex align-items-center">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                    A
-                                </div>
-                                <span class="ms-2 d-none d-md-inline">Admin</span>
-                            </div>
+                        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-shield"></i>
+                            <span class="d-none d-md-inline">Administrator</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="adminProfile.jsp"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2 text-primary"></i> Notifications</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2 text-primary"></i> My Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2 text-primary"></i> Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="LogoutServlet"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
@@ -327,7 +322,7 @@
                 <div class="main-card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4><i class="fas fa-users me-2"></i> Manage Students</h4>
-                        <a href="addStudent.jsp" class="btn btn-primary">
+                        <a href="studentRegistration.jsp" class="btn btn-primary">
                             <i class="fas fa-plus me-2"></i> Add New Student
                         </a>
                     </div>
@@ -335,13 +330,24 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
-                                    <tr>
+<!--                                    <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col" class="text-center">Actions</th>
-                                    </tr>
+                                    </tr>-->
+
+ <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Faculty</th>
+                                <th scope="col">Enrollment Date</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+
                                 </thead>
                                 <tbody>
                                     
@@ -356,10 +362,19 @@
                                             <td>${student.name}</td>
                                             <td>${student.email}</td>
                                              <td>${student.phone}</td>
+                                             
+                                                  
+                                    
+                                    <td>${student.facultyID}</td>
+                                    <td>${student.enrollmentDate}</td>
+                                             
+                                             
+                                             
                                             <td class="text-center">
-                                                <a href="editStudent.jsp?id=${student.id}" class="btn btn-outline-primary btn-sm action-btn me-2">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
+                                              <a href="${pageContext.request.contextPath}/EditStudentServlet2?id=${student.id}" 
+                                                  class="btn btn-outline-primary btn-sm action-btn me-2">
+                                                   <i class="fas fa-edit"></i> Edit
+                                               </a>
                                                 <a href="deleteStudent?id=${student.id}" 
                                                    onclick="return confirm('Are you sure you want to delete this student?')" 
                                                    class="btn btn-danger btn-sm action-btn">

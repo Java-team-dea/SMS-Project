@@ -83,7 +83,7 @@
         }
 
         .admin-badge {
-            background-color: #3949AB;
+            background-color: #3F51B5;
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
             border-radius: 30px;

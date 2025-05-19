@@ -317,7 +317,7 @@
                         <h4><i class="fas fa-money-bill-wave me-2"></i> Add New Fee Record</h4>
                     </div>
                     <div class="form-body">
-                        <form action="ManageFeesServlet" method="post">
+                        <form action="AddFeeServlet" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

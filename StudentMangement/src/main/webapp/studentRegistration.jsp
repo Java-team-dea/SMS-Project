@@ -190,7 +190,7 @@
                     <!-- Personal Information Section -->
                     <div class="mb-4">
                         <h5 class="text-success mb-3"><i class="fas fa-user me-2"></i>Personal Information</h5>
-                        
+
                         <!-- Name Field -->
                         <div class="form-floating mb-3 position-relative">
                             <input type="text" class="form-control" id="name" name="Name" placeholder="Full Name" required>

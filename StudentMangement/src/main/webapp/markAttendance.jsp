@@ -298,20 +298,20 @@
                         <h4><i class="fas fa-calendar-check me-2"></i> Mark Attendance for Course</h4>
                     </div>
                     <div class="form-body">
-                        <form action="ManageAttendanceServlet" method="post">
+                        <form action="MarkAttendanceServlet" method="post">
                             <div class="mb-3">
                                 <label for="studentId" class="form-label">Student ID:</label>
                                 <input type="text" class="form-control" id="studentId" name="studentId" required>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="courseId" class="form-label">Course ID:</label>
-                                <input type="text" class="form-control" id="courseId" name="courseId" required>
+                                <label for="moduleid" class="form-label">Module Code:</label>
+                                <input type="text" class="form-control" id="moduleid" name="moduleid" required>
                             </div>
                             
                             <div class="mb-4">
-                                <label for="attendanceStatus" class="form-label">Attendance Status:</label>
-                                <select class="form-select" id="attendanceStatus" name="attendanceStatus">
+                                <label for="status" class="form-label">Attendance Status:</label>
+                                <select class="form-select" id="status" name="status">
                                     <option value="Present">Present</option>
                                     <option value="Absent">Absent</option>
                                     <option value="Late">Late</option>
