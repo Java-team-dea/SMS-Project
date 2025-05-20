@@ -378,7 +378,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="small mb-0">© 2025 NSBM Green University. All Rights Reserved.</p>
+                    <p class="small mb-0">Â© 2025 NSBM Green University. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
                     <div class="social-icons">
